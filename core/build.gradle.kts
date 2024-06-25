@@ -44,7 +44,6 @@ android {
 }
 
 dependencies {
-
     implementation("androidx.core:core-ktx:1.13.1")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.2")
     implementation("androidx.activity:activity-compose:1.9.0")
@@ -79,4 +78,11 @@ dependencies {
 
     // KotlinX
     implementation(Libs.KotlinX.Datetime.core)
+
+    //Ktor
+    implementation("io.ktor:ktor-client-core:2.3.12")
+    implementation("io.ktor:ktor-client-android:2.3.12")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
+    implementation("io.ktor:ktor-client-json:2.3.12")
+    implementation("io.ktor:ktor-client-logging:1.6.5")
 }

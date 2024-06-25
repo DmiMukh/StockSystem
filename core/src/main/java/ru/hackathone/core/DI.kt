@@ -1,21 +1,30 @@
 package ru.hackathone.core
 
 import com.arkivanov.decompose.ComponentContext
+import io.ktor.client.HttpClient
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import ru.hackathone.core.message.ui.MessageComponent
 import org.koin.core.component.get
 import org.koin.dsl.module
-import ru.hackathone.core.inventoryApi.InventoryApi
+import ru.hackathone.core.inventoryApi.userAuthClient.AuthClient
+import ru.hackathone.core.inventoryApi.userAuthClient.AuthClientKtor
 import ru.hackathone.core.message.data.MessageService
 import ru.hackathone.core.message.data.MessageServiceImpl
 import ru.hackathone.core.message.ui.RealMessageComponent
 import kotlin.coroutines.EmptyCoroutineContext
+import io.ktor.client.engine.android.Android
+import io.ktor.client.plugins.ClientRequestException
+import io.ktor.client.plugins.HttpResponseValidator
+import io.ktor.client.plugins.RedirectResponseException
+import io.ktor.client.plugins.ResponseException
+import io.ktor.client.plugins.ServerResponseException
+import io.ktor.client.statement.HttpResponse
 
 val coreModule = module {
     single<CoroutineScope> { provideAppScope() }
     single<MessageService> { MessageServiceImpl() }
-  //  single<InventoryApi> { InventoryApiClient(client = provideKtorHttpClient(), storage = get()) }
+    single<AuthClient> { AuthClientKtor(providedKtorClient = provideKtorHttpClient()) }
 }
 
 fun ComponentFactory.createMessageComponent(
@@ -30,9 +39,10 @@ fun ComponentFactory.createMessageComponent(
 fun provideAppScope(): CoroutineScope {
     return CoroutineScope(EmptyCoroutineContext + Dispatchers.Default)
 }
-/* example
+
 fun provideKtorHttpClient(): HttpClient {
     return HttpClient(Android) {
+        /*
         install(Logging) {
             level = LogLevel.ALL
         }
@@ -47,7 +57,7 @@ fun provideKtorHttpClient(): HttpClient {
                 }
             )
         }
-
+*/
         HttpResponseValidator {
             validateResponse { response: HttpResponse ->
                 val statusCode = response.status.value
@@ -67,4 +77,3 @@ fun provideKtorHttpClient(): HttpClient {
         }
     }
 }
-*/
