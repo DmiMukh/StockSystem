@@ -25,11 +25,13 @@ import io.ktor.client.statement.HttpResponse
 import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
+import ru.hackathone.core.inventoryApi.userAuth.service.AuthService
 
 val coreModule = module {
     single<CoroutineScope> { provideAppScope() }
     single<MessageService> { MessageServiceImpl() }
     single<AuthClient> { AuthClientKtor(providedKtorClient = provideKtorHttpClient()) }
+    single<AuthService> { AuthService(client = get<AuthClientKtor>()) }
 }
 
 fun ComponentFactory.createMessageComponent(

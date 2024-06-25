@@ -7,8 +7,7 @@ import ru.hackathone.core.inventoryApi.userAuth.client.AuthClient
 import ru.hackathone.core.inventoryApi.userAuth.dto.SignInResponse
 import ru.hackathone.core.inventoryApi.userAuth.dto.SignUpResponse
 
-class AuthService() {
-    private lateinit var client: AuthClient
+class AuthService(private var client: AuthClient) {
 
     suspend fun signUp(login: String, password: String): Int {
         val response = client.signUp(login, password)
