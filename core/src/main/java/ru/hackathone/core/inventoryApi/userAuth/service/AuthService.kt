@@ -1,7 +1,6 @@
 package ru.hackathone.core.inventoryApi.userAuth.service
 
 import io.ktor.client.call.body
-import io.ktor.client.call.receive
 import io.ktor.http.HttpStatusCode
 import ru.hackathone.core.inventoryApi.exceptions.BadRequestException
 import ru.hackathone.core.inventoryApi.exceptions.UnknownStatusCodeException
