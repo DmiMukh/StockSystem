@@ -5,6 +5,8 @@ import ru.hackathone.core.ComponentFactory
 import ru.hackathone.core.coreModule
 import ru.hackathone.stocksystem.home.HomeComponent
 import ru.hackathone.stocksystem.home.RealHomeComponent
+import ru.hackathone.stocksystem.signin.RealSignInComponent
+import ru.hackathone.stocksystem.signin.SignInComponent
 import ru.hackathone.stocksystem.splash.RealSplashComponent
 import ru.hackathone.stocksystem.splash.SplashComponent
 
@@ -16,6 +18,14 @@ fun ComponentFactory.createHomeComponent(
     componentContext: ComponentContext
 ): HomeComponent {
     return RealHomeComponent(
+        componentContext = componentContext
+    )
+}
+
+fun ComponentFactory.createSignInComponent(
+    componentContext: ComponentContext
+): SignInComponent {
+    return RealSignInComponent(
         componentContext = componentContext
     )
 }
