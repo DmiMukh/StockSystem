@@ -7,8 +7,8 @@ import kotlinx.coroutines.Dispatchers
 import ru.hackathone.core.message.ui.MessageComponent
 import org.koin.core.component.get
 import org.koin.dsl.module
-import ru.hackathone.core.inventoryApi.userAuthClient.AuthClient
-import ru.hackathone.core.inventoryApi.userAuthClient.AuthClientKtor
+import ru.hackathone.core.inventoryApi.userAuth.client.AuthClient
+import ru.hackathone.core.inventoryApi.userAuth.client.AuthClientKtor
 import ru.hackathone.core.message.data.MessageService
 import ru.hackathone.core.message.data.MessageServiceImpl
 import ru.hackathone.core.message.ui.RealMessageComponent
@@ -19,7 +19,12 @@ import io.ktor.client.plugins.HttpResponseValidator
 import io.ktor.client.plugins.RedirectResponseException
 import io.ktor.client.plugins.ResponseException
 import io.ktor.client.plugins.ServerResponseException
+import io.ktor.client.plugins.logging.LogLevel
+import io.ktor.client.plugins.logging.Logging
 import io.ktor.client.statement.HttpResponse
+import io.ktor.client.plugins.contentnegotiation.*
+import io.ktor.serialization.kotlinx.json.json
+import kotlinx.serialization.json.Json
 
 val coreModule = module {
     single<CoroutineScope> { provideAppScope() }
@@ -42,7 +47,7 @@ fun provideAppScope(): CoroutineScope {
 
 fun provideKtorHttpClient(): HttpClient {
     return HttpClient(Android) {
-        /*
+
         install(Logging) {
             level = LogLevel.ALL
         }
@@ -57,7 +62,7 @@ fun provideKtorHttpClient(): HttpClient {
                 }
             )
         }
-*/
+
         HttpResponseValidator {
             validateResponse { response: HttpResponse ->
                 val statusCode = response.status.value
