@@ -13,6 +13,7 @@ import ru.hackathone.core.ComponentFactory
 import ru.hackathone.core.createMessageComponent
 import ru.hackathone.core.utils.toStateFlow
 import ru.hackathone.stocksystem.createHomeComponent
+import ru.hackathone.stocksystem.createSignInComponent
 import ru.hackathone.stocksystem.createSplashComponent
 
 class RealRootComponent(
@@ -44,10 +45,16 @@ class RealRootComponent(
             )
         )
 
+        ChildConfig.SignIn -> RootComponent.Child.SignIn(
+            component = this.componentFactory.createSignInComponent(
+                componentContext = componentContext
+            )
+        )
+
         ChildConfig.Splash -> RootComponent.Child.Splash(
             component = this.componentFactory.createSplashComponent(
                 componentContext = componentContext,
-                onFinish = { navigation.replaceCurrent(ChildConfig.Home) }
+                onFinish = { navigation.replaceCurrent(ChildConfig.SignIn) }
             )
         )
     }
@@ -56,6 +63,9 @@ class RealRootComponent(
 
         @Parcelize
         object Home : ChildConfig
+
+        @Parcelize
+        object SignIn : ChildConfig
 
         @Parcelize
         object Splash : ChildConfig
