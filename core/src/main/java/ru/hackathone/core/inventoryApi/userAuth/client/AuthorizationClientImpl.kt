@@ -6,6 +6,8 @@ import io.ktor.client.statement.HttpResponse
 
 import io.ktor.client.request.*
 import io.ktor.http.*
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 import ru.hackathone.core.inventoryApi.userAuth.dto.AuthorizationRequest
 
 class AuthorizationClientImpl(private val client: HttpClient) : AuthorizationClient {
@@ -19,7 +21,7 @@ class AuthorizationClientImpl(private val client: HttpClient) : AuthorizationCli
     override suspend fun signIn(login: String, password: String): HttpResponse {
         return client.post("$addr/auth/sign-in") {
             contentType(ContentType.Application.Json)
-            setBody(AuthorizationRequest(login, password))
+            setBody(Json.encodeToString(AuthorizationRequest(login, password)))
         }
     }
 
@@ -31,7 +33,7 @@ class AuthorizationClientImpl(private val client: HttpClient) : AuthorizationCli
     override suspend fun signUp(login: String, password: String): HttpResponse {
         return client.post("$addr/auth/sign-in") {
             contentType(ContentType.Application.Json)
-            setBody(AuthorizationRequest(login, password))
+            setBody(Json.encodeToString(AuthorizationRequest(login, password)))
         }
     }
 }
