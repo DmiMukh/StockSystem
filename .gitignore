@@ -1,5 +1,6 @@
 *.iml
 .gradle
+.idea
 /local.properties
 /.idea/caches
 /.idea/libraries
@@ -13,6 +14,7 @@
 .externalNativeBuild
 .cxx
 local.properties
+/buildSrc/build.*
 /buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/class-attributes.tab
 /buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/class-attributes.tab.keystream
 /buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/class-attributes.tab.keystream.len
