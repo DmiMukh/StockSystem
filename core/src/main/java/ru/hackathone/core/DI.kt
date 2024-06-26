@@ -7,8 +7,8 @@ import kotlinx.coroutines.Dispatchers
 import ru.hackathone.core.message.ui.MessageComponent
 import org.koin.core.component.get
 import org.koin.dsl.module
-import ru.hackathone.core.inventoryApi.userAuth.client.AuthClient
-import ru.hackathone.core.inventoryApi.userAuth.client.AuthClientKtor
+import ru.hackathone.core.inventoryApi.userAuth.client.AuthorizationClient
+import ru.hackathone.core.inventoryApi.userAuth.client.AuthorizationClientImpl
 import ru.hackathone.core.message.data.MessageService
 import ru.hackathone.core.message.data.MessageServiceImpl
 import ru.hackathone.core.message.ui.RealMessageComponent
@@ -25,13 +25,13 @@ import io.ktor.client.statement.HttpResponse
 import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
-import ru.hackathone.core.inventoryApi.userAuth.service.AuthService
+import ru.hackathone.core.inventoryApi.userAuth.service.AuthorizationServiceImpl
 
 val coreModule = module {
     single<CoroutineScope> { provideAppScope() }
     single<MessageService> { MessageServiceImpl() }
-    single<AuthClient> { AuthClientKtor(providedKtorClient = provideKtorHttpClient()) }
-    single<AuthService> { AuthService(client = get<AuthClientKtor>()) }
+    single<AuthorizationClient> { AuthorizationClientImpl(client = provideKtorHttpClient()) }
+    single<AuthorizationServiceImpl> { AuthorizationServiceImpl(client = get<AuthorizationClientImpl>()) }
 }
 
 fun ComponentFactory.createMessageComponent(

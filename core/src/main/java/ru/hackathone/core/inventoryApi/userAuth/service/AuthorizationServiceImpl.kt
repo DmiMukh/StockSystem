@@ -1,14 +1,15 @@
 package ru.hackathone.core.inventoryApi.userAuth.service
 
+import android.content.res.Resources.NotFoundException
 import io.ktor.client.call.body
 import io.ktor.http.HttpStatusCode
 import ru.hackathone.core.inventoryApi.exceptions.BadRequestException
 import ru.hackathone.core.inventoryApi.exceptions.UnknownStatusCodeException
-import ru.hackathone.core.inventoryApi.userAuth.client.AuthClient
+import ru.hackathone.core.inventoryApi.userAuth.client.AuthorizationClient
 import ru.hackathone.core.inventoryApi.userAuth.dto.SignInResponse
 import ru.hackathone.core.inventoryApi.userAuth.dto.SignUpResponse
 
-class AuthService(private var client: AuthClient) {
+class AuthorizationServiceImpl(private var client: AuthorizationClient) : AuthorizationService {
     /**
     Sign-Up with the provided login and password.
     @login : String
@@ -17,8 +18,9 @@ class AuthService(private var client: AuthClient) {
     Can trow:
     NoTransformationFoundException if responded json don't match DTO Class
     BadRequestException if server responded 400 aka wrong parameters
-    UnknownStatusCodeException for else responded statuses */
-    suspend fun signUp(login: String, password: String): Int {
+    UnknownStatusCodeException for else responded statuses
+    NotFoundException 404 */
+    override suspend fun signUp(login: String, password: String): Int {
         val response = client.signUp(login, password)
         when (response.status) {
             HttpStatusCode.OK -> {
@@ -27,6 +29,7 @@ class AuthService(private var client: AuthClient) {
             }
 
             HttpStatusCode.BadRequest -> throw BadRequestException()
+            HttpStatusCode.NotFound -> throw NotFoundException()
             else -> throw UnknownStatusCodeException()
         }
     }
@@ -39,8 +42,9 @@ class AuthService(private var client: AuthClient) {
     Can trow:
     NoTransformationFoundException if responded json don't match DTO Class
     BadRequestException if server responded 400 aka wrong parameters
-    UnknownStatusCodeException for else responded statuses */
-    suspend fun signIn(login: String, password: String): String {
+    UnknownStatusCodeException for else responded statuses
+    NotFoundException 404 */
+    override suspend fun signIn(login: String, password: String): String {
         val response = client.signIn(login, password)
         when (response.status) {
             HttpStatusCode.OK -> {
@@ -49,6 +53,7 @@ class AuthService(private var client: AuthClient) {
             }
 
             HttpStatusCode.BadRequest -> throw BadRequestException()
+            HttpStatusCode.NotFound -> throw NotFoundException()
             else -> throw UnknownStatusCodeException()
         }
     }
