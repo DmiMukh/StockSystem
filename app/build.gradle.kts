@@ -2,6 +2,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("kotlin-parcelize")
+    kotlin(Libs.KotlinX.Serialization.plugin) version Libs.KotlinX.Serialization.pluginVersion
 }
 
 android {
@@ -84,4 +85,9 @@ dependencies {
     implementation(Libs.Koin.core)
     implementation(Libs.Koin.android)
     implementation(Libs.Koin.compose)
+
+    // KotlinX
+    implementation(Libs.KotlinX.Datetime.core)
+    implementation(Libs.KotlinX.Serialization.contentNegotation)
+    implementation(Libs.KotlinX.Serialization.json)
 }
