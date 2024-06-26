@@ -1,14 +1,15 @@
 package ru.hackathone.core.inventoryApi.userAuth.client
 
-import io.ktor.client.*
+import io.ktor.client.HttpClient
 import io.ktor.client.request.post
+import io.ktor.client.request.setBody
 import io.ktor.client.statement.HttpResponse
-
-import io.ktor.client.request.*
-import io.ktor.http.*
+import io.ktor.http.ContentType
+import io.ktor.http.contentType
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import ru.hackathone.core.inventoryApi.userAuth.dto.AuthorizationRequest
+
 
 class AuthorizationClientImpl(private val client: HttpClient) : AuthorizationClient {
     private var addr: String = "http://localhost:8080"

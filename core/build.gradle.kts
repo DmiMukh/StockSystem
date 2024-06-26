@@ -1,6 +1,8 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
+    id("kotlin-parcelize")
+    kotlin(Libs.KotlinX.Serialization.plugin) version Libs.KotlinX.Serialization.pluginVersion
 }
 
 android {
@@ -78,6 +80,10 @@ dependencies {
 
     // KotlinX
     implementation(Libs.KotlinX.Datetime.core)
+    // KotlinX
+    implementation(Libs.KotlinX.Datetime.core)
+    implementation(Libs.KotlinX.Serialization.contentNegotation)
+    implementation(Libs.KotlinX.Serialization.json)
 
     //Ktor
     val ktor_version = "2.3.12"
@@ -87,4 +93,7 @@ dependencies {
     implementation("io.ktor:ktor-serialization-kotlinx-json:$ktor_version")
     implementation("io.ktor:ktor-client-logging:$ktor_version")
     implementation("io.ktor:ktor-client-content-negotiation:$ktor_version")
+
+    //Ktor logging
+    implementation("ch.qos.logback:logback-classic:1.5.3")
 }

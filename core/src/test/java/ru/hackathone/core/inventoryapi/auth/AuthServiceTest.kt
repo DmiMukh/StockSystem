@@ -1,9 +1,8 @@
 package ru.hackathone.core.inventoryapi.auth
 
 import kotlinx.coroutines.runBlocking
+import org.junit.Assert.assertNotEquals
 import org.junit.Test
-
-import org.junit.Assert.*
 import ru.hackathone.core.inventoryApi.userAuth.client.AuthorizationClientImpl
 import ru.hackathone.core.inventoryApi.userAuth.service.AuthorizationServiceImpl
 import ru.hackathone.core.provideKtorHttpClient
