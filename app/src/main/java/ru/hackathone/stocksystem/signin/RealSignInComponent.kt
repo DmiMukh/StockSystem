@@ -6,11 +6,18 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import ru.hackathone.core.utils.componentCoroutineScope
+import ru.hackathone.stocksystem.signin.toolbar.RealSignInToolbarComponent
+import ru.hackathone.stocksystem.signin.toolbar.SignInToolbarComponent
 
 class RealSignInComponent(
     componentContext: ComponentContext,
+    private val onSettings: () -> Unit,
     private val onSignInComplete: () -> Unit
 ) : ComponentContext by componentContext, SignInComponent {
+    override val toolbarComponent = RealSignInToolbarComponent(
+        componentContext = componentContext,
+        onSettings = this.onSettings
+    )
 
     override val login = MutableStateFlow("")
 
@@ -21,7 +28,6 @@ class RealSignInComponent(
     override val passwordVisibility = MutableStateFlow(false)
 
     private val coroutineScope = componentCoroutineScope()
-
 
     override fun onLoginChanged(login: String) {
         this.login.value = login

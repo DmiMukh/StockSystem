@@ -22,7 +22,7 @@ fun SettingsToolbarUi(component: SettingsToolbarComponent) {
     TopAppBar(
         title = { Text(text = "Product List") },
         navigationIcon = {
-            IconButton(onClick = {}) {
+            IconButton(onClick = component::onBackClick) {
                 Icon(
                     imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                     contentDescription = "arrow_back",

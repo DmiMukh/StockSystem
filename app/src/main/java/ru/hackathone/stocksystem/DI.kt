@@ -42,10 +42,12 @@ fun ComponentFactory.createSettingsComponent(
 
 fun ComponentFactory.createSignInComponent(
     componentContext: ComponentContext,
+    onSettings: () -> Unit,
     onSignInComplete: () -> Unit
 ): SignInComponent {
     return RealSignInComponent(
         componentContext = componentContext,
+        onSettings = onSettings,
         onSignInComplete = onSignInComplete
     )
 }

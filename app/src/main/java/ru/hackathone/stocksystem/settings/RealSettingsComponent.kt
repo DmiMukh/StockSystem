@@ -17,6 +17,7 @@ class RealSettingsComponent(
 
     override val toolbarComponent = RealSettingsToolbarComponent(
         componentContext = componentContext,
+        onBack = this.onBack,
         onSave = { this.onSave() }
     )
     override val authServiceHost get() = componentInstance.authHost

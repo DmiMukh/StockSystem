@@ -30,6 +30,7 @@ import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.Dispatchers
 import ru.hackathone.core.theme.AppTheme
 import ru.hackathone.stocksystem.R
+import ru.hackathone.stocksystem.signin.toolbar.SignInToolbarUi
 
 @Composable
 fun SignInUi(component: SignInComponent) {
@@ -46,7 +47,7 @@ fun SignInUi(component: SignInComponent) {
         painterResource(id = R.drawable.ic_visibility_off)
 
     Scaffold(
-        topBar = {  }
+        topBar = { SignInToolbarUi(component.toolbarComponent) }
     ) { paddingValues ->
         Box(modifier = Modifier
             .fillMaxSize()
@@ -82,10 +83,16 @@ fun SignInUi(component: SignInComponent) {
                     )
                 }
 
-                Box(modifier = Modifier.padding(12.dp).heightIn(min = 72.dp).fillMaxWidth()){
+                Box(modifier = Modifier
+                    .padding(12.dp)
+                    .heightIn(min = 72.dp)
+                    .fillMaxWidth()){
                     if (inProgress.value) {
                         CircularProgressIndicator(
-                            modifier = Modifier.then(Modifier.size(32.dp).align(Alignment.Center)))
+                            modifier = Modifier.then(
+                                Modifier
+                                    .size(32.dp)
+                                    .align(Alignment.Center)))
                     } else {
                         Button(
                             onClick = component::onSignInClick,

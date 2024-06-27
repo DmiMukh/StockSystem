@@ -1,8 +1,11 @@
 package ru.hackathone.stocksystem.signin
 
 import kotlinx.coroutines.flow.StateFlow
+import ru.hackathone.stocksystem.signin.toolbar.SignInToolbarComponent
 
 interface SignInComponent {
+
+    val toolbarComponent: SignInToolbarComponent
 
     val login: StateFlow<String>
 
@@ -11,7 +14,6 @@ interface SignInComponent {
     val inProgress: StateFlow<Boolean>
 
     val passwordVisibility: StateFlow<Boolean>
-
 
     fun onLoginChanged(login: String)
 

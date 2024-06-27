@@ -68,6 +68,7 @@ class RealRootComponent(
         ChildConfig.SignIn -> RootComponent.Child.SignIn(
             component = this.componentFactory.createSignInComponent(
                 componentContext = componentContext,
+                onSettings = { navigation.push(ChildConfig.Settings) },
                 onSignInComplete = { navigation.replaceCurrent(ChildConfig.Home) }
             )
         )
