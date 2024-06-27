@@ -20,6 +20,7 @@ class AuthServiceTest {
     fun signInCorrectRequest() {
         runBlocking {
             val token = authService.signIn("kotlin", "123")
+            println("token = $token")
             assertNotEquals(token, null)
         }
     }
@@ -28,6 +29,7 @@ class AuthServiceTest {
     fun signUpCorrectRequest() {
         runBlocking {
             val id = authService.signIn("kotlin", "123")
+            println("role-id = $id")
             assertNotEquals(id, null)
         }
     }
