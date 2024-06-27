@@ -1,4 +1,4 @@
-package ru.hackathone.stocksystem.product.list.toolbar
+package ru.hackathone.stocksystem.product.details.toolbar
 
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
@@ -11,16 +11,14 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
-import ru.hackathone.core.theme.AppTheme
 import ru.hackathone.core.utils.ICON_SIZE
 import ru.hackathone.stocksystem.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ProductListToolbarUi(component: ProductListToolbarComponent){
+fun ProductDetailsToolbarUi(component: ProductDetailsToolbarComponent){
     TopAppBar(
-        title = { Text(text = "Product List") },
+        title = { Text(text = "Product Details") },
         navigationIcon = {
             IconButton(onClick = component::onBackClick) {
                 Icon(
@@ -31,7 +29,6 @@ fun ProductListToolbarUi(component: ProductListToolbarComponent){
             }
         },
         actions = {
-            /*
             IconButton(onClick = component::onSaveClick) {
                 Icon(
                     painter = painterResource(R.drawable.ic_save),
@@ -39,28 +36,6 @@ fun ProductListToolbarUi(component: ProductListToolbarComponent){
                     modifier = Modifier.size(ICON_SIZE)
                 )
             }
-            */
         }
     )
-}
-
-@Composable
-fun ProductListToolbarUiPreview(darkTheme: Boolean){
-    AppTheme(
-        darkTheme = darkTheme
-    ) {
-        ProductListToolbarUi(FakeProductListToolbarComponent())
-    }
-}
-
-@Preview(name = "light")
-@Composable
-fun ProductListToolbarUiPreviewLight(){
-    ProductListToolbarUiPreview(darkTheme = false)
-}
-
-@Preview(name = "dark")
-@Composable
-fun ProductListToolbarUiPreviewDark(){
-    ProductListToolbarUiPreview(darkTheme = true)
 }
