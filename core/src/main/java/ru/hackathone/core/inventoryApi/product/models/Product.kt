@@ -1,4 +1,4 @@
-package ru.hackathone.core.inventoryApi.product.dto
+package ru.hackathone.core.inventoryApi.product.models
 
 data class Product(
     val id: Int,
