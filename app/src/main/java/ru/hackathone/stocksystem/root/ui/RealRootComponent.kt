@@ -15,6 +15,7 @@ import ru.hackathone.core.ComponentFactory
 import ru.hackathone.core.createMessageComponent
 import ru.hackathone.core.utils.toStateFlow
 import ru.hackathone.stocksystem.createHomeComponent
+import ru.hackathone.stocksystem.createSettingsComponent
 import ru.hackathone.stocksystem.createSignInComponent
 import ru.hackathone.stocksystem.createSplashComponent
 import ru.hackathone.stocksystem.product.createProductRootComponent
@@ -57,6 +58,13 @@ class RealRootComponent(
             )
         )
 
+        ChildConfig.Settings -> RootComponent.Child.Settings(
+            component = this.componentFactory.createSettingsComponent(
+                componentContext = componentContext,
+                onBack = { navigation.pop() }
+            )
+        )
+
         ChildConfig.SignIn -> RootComponent.Child.SignIn(
             component = this.componentFactory.createSignInComponent(
                 componentContext = componentContext,
@@ -79,6 +87,9 @@ class RealRootComponent(
 
         @Parcelize
         object ProductRoot : ChildConfig
+
+        @Parcelize
+        object Settings : ChildConfig
 
         @Parcelize
         object SignIn : ChildConfig

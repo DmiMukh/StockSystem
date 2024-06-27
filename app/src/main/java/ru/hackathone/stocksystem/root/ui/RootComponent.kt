@@ -5,6 +5,7 @@ import kotlinx.coroutines.flow.StateFlow
 import ru.hackathone.core.message.ui.MessageComponent
 import ru.hackathone.stocksystem.home.HomeComponent
 import ru.hackathone.stocksystem.product.root.ProductRootComponent
+import ru.hackathone.stocksystem.settings.SettingsComponent
 import ru.hackathone.stocksystem.signin.SignInComponent
 import ru.hackathone.stocksystem.splash.SplashComponent
 
@@ -18,6 +19,7 @@ interface RootComponent {
 
         class Home(val component: HomeComponent) : Child
         class ProductRoot(val component: ProductRootComponent) : Child
+        class Settings(val component: SettingsComponent) : Child
         class SignIn(val component: SignInComponent) : Child
         class Splash(val component: SplashComponent) : Child
     }
