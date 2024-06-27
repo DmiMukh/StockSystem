@@ -11,6 +11,6 @@ class SerializationTest {
     fun serializationCorrect() {
         val json = Json.encodeToString(AuthorizationRequest("login", "123"))
         println(json)
-        assertEquals(json, "{login:login,password:123}")
+        assertEquals(json, "{\"login\":\"login\",\"password\":\"123\"}")
     }
 }
