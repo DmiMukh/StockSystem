@@ -5,8 +5,8 @@ import ru.hackathone.core.inventoryApi.staff.models.Task
 import ru.hackathone.core.inventoryApi.staff.models.TaskStatus
 
 interface StaffClient {
-    suspend fun getAllTasks(): HttpResponse
-    suspend fun getTaskListByStatusName(taskStatus: TaskStatus): HttpResponse
+    suspend fun getTaskList(): HttpResponse
+    suspend fun getTaskListByStatus(taskStatus: TaskStatus): HttpResponse
     suspend fun getTaskById(taskId: Int): HttpResponse
 
     suspend fun createTask(task: Task): HttpResponse

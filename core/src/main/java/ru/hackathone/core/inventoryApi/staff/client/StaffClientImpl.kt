@@ -1,7 +1,6 @@
 package ru.hackathone.core.inventoryApi.staff.client
 
 import io.ktor.client.HttpClient
-import io.ktor.client.HttpClient.*
 import io.ktor.client.request.delete
 import io.ktor.client.request.get
 import io.ktor.client.request.post
@@ -18,11 +17,11 @@ import ru.hackathone.core.inventoryApi.staff.models.TaskStatus
 class StaffClientImpl(private val client: HttpClient) : StaffClient {
     private val addr = "http://localhost:8090"
 
-    override suspend fun getAllTasks(): HttpResponse {
+    override suspend fun getTaskList(): HttpResponse {
         return client.get("$addr/task/")
     }
 
-    override suspend fun getTaskListByStatusName(taskStatus: TaskStatus): HttpResponse {
+    override suspend fun getTaskListByStatus(taskStatus: TaskStatus): HttpResponse {
         return client.get("$addr/task/status/$taskStatus")
     }
 
