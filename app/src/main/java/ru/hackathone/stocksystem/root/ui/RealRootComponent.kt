@@ -18,6 +18,7 @@ import ru.hackathone.stocksystem.createHomeComponent
 import ru.hackathone.stocksystem.createSettingsComponent
 import ru.hackathone.stocksystem.createSignInComponent
 import ru.hackathone.stocksystem.createSplashComponent
+import ru.hackathone.stocksystem.order.createOrderRootComponent
 import ru.hackathone.stocksystem.product.createProductRootComponent
 
 class RealRootComponent(
@@ -46,8 +47,16 @@ class RealRootComponent(
         ChildConfig.Home -> RootComponent.Child.Home(
             component = this.componentFactory.createHomeComponent(
                 componentContext = componentContext,
+                onOrder = { navigation.push(ChildConfig.OrderRoot) },
                 onProduct = { navigation.push(ChildConfig.ProductRoot) },
                 onStaff = {}
+            )
+        )
+
+        ChildConfig.OrderRoot -> RootComponent.Child.OrderRoot(
+            component = this.componentFactory.createOrderRootComponent(
+                componentContext = componentContext,
+                onBack = { navigation.pop() }
             )
         )
 
@@ -85,6 +94,9 @@ class RealRootComponent(
 
         @Parcelize
         object Home : ChildConfig
+
+        @Parcelize
+        object OrderRoot : ChildConfig
 
         @Parcelize
         object ProductRoot : ChildConfig

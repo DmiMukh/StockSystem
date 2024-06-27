@@ -4,6 +4,7 @@ import com.arkivanov.decompose.router.stack.ChildStack
 import kotlinx.coroutines.flow.StateFlow
 import ru.hackathone.core.message.ui.MessageComponent
 import ru.hackathone.stocksystem.home.HomeComponent
+import ru.hackathone.stocksystem.order.root.OrderRootComponent
 import ru.hackathone.stocksystem.product.root.ProductRootComponent
 import ru.hackathone.stocksystem.settings.SettingsComponent
 import ru.hackathone.stocksystem.signin.SignInComponent
@@ -18,6 +19,7 @@ interface RootComponent {
     sealed interface Child {
 
         class Home(val component: HomeComponent) : Child
+        class OrderRoot(val component: OrderRootComponent) : Child
         class ProductRoot(val component: ProductRootComponent) : Child
         class Settings(val component: SettingsComponent) : Child
         class SignIn(val component: SignInComponent) : Child

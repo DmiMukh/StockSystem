@@ -11,6 +11,7 @@ import com.arkivanov.decompose.extensions.compose.jetpack.stack.animation.scale
 import com.arkivanov.decompose.extensions.compose.jetpack.stack.animation.stackAnimation
 import ru.hackathone.core.message.ui.MessageUi
 import ru.hackathone.stocksystem.home.HomeUi
+import ru.hackathone.stocksystem.order.root.OrderRootUi
 import ru.hackathone.stocksystem.product.root.ProductRootUi
 import ru.hackathone.stocksystem.settings.SettingsUi
 import ru.hackathone.stocksystem.signin.SignInUi
@@ -30,6 +31,7 @@ fun RootContent(
     ) {
         when (val child = it.instance) {
             is RootComponent.Child.Home -> HomeUi(child.component)
+            is RootComponent.Child.OrderRoot -> OrderRootUi(child.component)
             is RootComponent.Child.ProductRoot -> ProductRootUi(child.component)
             is RootComponent.Child.Settings -> SettingsUi(child.component)
             is RootComponent.Child.SignIn -> SignInUi(child.component)

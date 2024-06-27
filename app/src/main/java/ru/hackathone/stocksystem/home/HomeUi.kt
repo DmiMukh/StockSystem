@@ -24,6 +24,12 @@ fun HomeUi(component: HomeComponent) {
                 .fillMaxWidth()
                 .padding(paddingValues)
         ) {
+
+            MenuButton(
+                title = "Order",
+                onClick = component::onOrderClick
+            )
+
             MenuButton(
                 title = "Product",
                 onClick = component::onProductClick

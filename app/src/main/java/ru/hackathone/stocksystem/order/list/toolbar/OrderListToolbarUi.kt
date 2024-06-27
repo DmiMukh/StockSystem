@@ -1,4 +1,4 @@
-package ru.hackathone.stocksystem.product.details.toolbar
+package ru.hackathone.stocksystem.order.list.toolbar
 
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
@@ -10,17 +10,15 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import ru.hackathone.core.theme.AppTheme
 import ru.hackathone.core.utils.ICON_SIZE
-import ru.hackathone.stocksystem.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ProductDetailsToolbarUi(component: ProductDetailsToolbarComponent){
+fun OrderListToolbarUi(component: OrderListToolbarComponent) {
     TopAppBar(
-        title = { Text(text = "Product Details") },
+        title = { Text(text = "Order List") },
         navigationIcon = {
             IconButton(onClick = component::onBackClick) {
                 Icon(
@@ -29,36 +27,27 @@ fun ProductDetailsToolbarUi(component: ProductDetailsToolbarComponent){
                     modifier = Modifier.size(ICON_SIZE)
                 )
             }
-        },
-        actions = {
-            IconButton(onClick = component::onSaveClick) {
-                Icon(
-                    painter = painterResource(R.drawable.ic_save),
-                    contentDescription = "save",
-                    modifier = Modifier.size(ICON_SIZE)
-                )
-            }
         }
     )
 }
 
 @Composable
-fun ProductDetailsToolbarUiPreview(darkTheme: Boolean){
+fun OrderListToolbarUiPreview(darkTheme: Boolean){
     AppTheme(
         darkTheme = darkTheme
     ) {
-        ProductDetailsToolbarUi(FakeProductDetailsToolbarComponent())
+        OrderListToolbarUi(FakeOrderListToolbarComponent())
     }
 }
 
 @Preview(name = "light")
 @Composable
-fun ProductDetailsToolbarUiPreviewLight(){
-    ProductDetailsToolbarUiPreview(darkTheme = false)
+fun OrderListToolbarUiPreviewLight(){
+    OrderListToolbarUiPreview(darkTheme = false)
 }
 
 @Preview(name = "dark")
 @Composable
-fun ProductDetailsToolbarUiPreviewDark(){
-    ProductDetailsToolbarUiPreview(darkTheme = true)
+fun OrderListToolbarUiPreviewDark(){
+    OrderListToolbarUiPreview(darkTheme = true)
 }

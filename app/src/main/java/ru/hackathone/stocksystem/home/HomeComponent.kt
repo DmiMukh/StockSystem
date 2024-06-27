@@ -6,6 +6,7 @@ interface HomeComponent {
 
     val toolbarComponent: HomeToolbarComponent
 
+    fun onOrderClick()
     fun onProductClick()
     fun onStaffClick()
 

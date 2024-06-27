@@ -5,6 +5,7 @@ import ru.hackathone.stocksystem.home.toolbar.RealHomeToolbarComponent
 
 class RealHomeComponent(
     componentContext: ComponentContext,
+    private val onOrder: () -> Unit,
     private val onProduct: () -> Unit,
     private val onStaff: () -> Unit
 ) : ComponentContext by componentContext, HomeComponent {
@@ -12,6 +13,8 @@ class RealHomeComponent(
     override val toolbarComponent = RealHomeToolbarComponent(
         componentContext = componentContext
     )
+
+    override fun onOrderClick() = this.onOrder.invoke()
 
     override fun onProductClick() = this.onProduct.invoke()
 

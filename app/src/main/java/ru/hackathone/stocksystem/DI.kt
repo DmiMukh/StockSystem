@@ -19,11 +19,13 @@ val allModules = listOf(
 
 fun ComponentFactory.createHomeComponent(
     componentContext: ComponentContext,
+    onOrder: () -> Unit,
     onProduct: () -> Unit,
     onStaff: () -> Unit
 ): HomeComponent {
     return RealHomeComponent(
         componentContext = componentContext,
+        onOrder = onOrder,
         onProduct = onProduct,
         onStaff = onStaff
     )
