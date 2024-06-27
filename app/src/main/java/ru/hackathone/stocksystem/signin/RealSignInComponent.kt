@@ -32,7 +32,7 @@ class RealSignInComponent(
     }
 
     override fun onVisibilityChanged(visibility: Boolean) {
-        this.passwordVisibility.value = visibility;
+        this.passwordVisibility.value = visibility
     }
 
     override fun onSignInClick() {

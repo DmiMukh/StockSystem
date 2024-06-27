@@ -26,12 +26,12 @@ fun HomeUi(component: HomeComponent) {
         ) {
             MenuButton(
                 title = "Product",
-                onClick = {}
+                onClick = component::onProductClick
             )
 
             MenuButton(
                 title = "Staff",
-                onClick = {}
+                onClick = component::onStaffClick
             )
         }
     }

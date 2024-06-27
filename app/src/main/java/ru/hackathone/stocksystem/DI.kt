@@ -15,10 +15,14 @@ val allModules = listOf(
 )
 
 fun ComponentFactory.createHomeComponent(
-    componentContext: ComponentContext
+    componentContext: ComponentContext,
+    onProduct: () -> Unit,
+    onStaff: () -> Unit
 ): HomeComponent {
     return RealHomeComponent(
-        componentContext = componentContext
+        componentContext = componentContext,
+        onProduct = onProduct,
+        onStaff = onStaff
     )
 }
 
