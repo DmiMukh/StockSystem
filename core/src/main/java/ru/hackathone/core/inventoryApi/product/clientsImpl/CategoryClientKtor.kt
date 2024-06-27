@@ -3,16 +3,16 @@ package ru.hackathone.core.inventoryApi.product.clientsImpl
 import io.ktor.client.HttpClient
 import io.ktor.client.statement.HttpResponse
 import ru.hackathone.core.inventoryApi.product.clientsInterfaces.CategoryClient
-import ru.hackathone.core.inventoryApi.product.dto.Category
+import ru.hackathone.core.inventoryApi.product.models.ProductCategory
 
 class CategoryClientKtor(private val client: HttpClient) : CategoryClient {
     val addr = "http://localhost:8090"
 
-    override suspend fun create(category: Category): HttpResponse {
+    override suspend fun create(category: ProductCategory): HttpResponse {
         TODO("Not yet implemented")
     }
 
-    override suspend fun update(id: Int, category: Category): HttpResponse {
+    override suspend fun update(id: Int, category: ProductCategory): HttpResponse {
         TODO("Not yet implemented")
     }
 

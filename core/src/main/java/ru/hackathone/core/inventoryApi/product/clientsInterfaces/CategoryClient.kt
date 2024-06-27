@@ -1,11 +1,11 @@
 package ru.hackathone.core.inventoryApi.product.clientsInterfaces
 
 import io.ktor.client.statement.HttpResponse
-import ru.hackathone.core.inventoryApi.product.dto.Category
+import ru.hackathone.core.inventoryApi.product.models.ProductCategory
 
 interface CategoryClient {
-    suspend fun create(category: Category) : HttpResponse
-    suspend fun update(id: Int, category: Category) : HttpResponse
+    suspend fun create(category: ProductCategory) : HttpResponse
+    suspend fun update(id: Int, category: ProductCategory) : HttpResponse
     suspend fun delete(id: Int) : HttpResponse
 
     suspend fun getAll() : HttpResponse
