@@ -80,8 +80,6 @@ dependencies {
 
     // KotlinX
     implementation(Libs.KotlinX.Datetime.core)
-    // KotlinX
-    implementation(Libs.KotlinX.Datetime.core)
     implementation(Libs.KotlinX.Serialization.contentNegotation)
     implementation(Libs.KotlinX.Serialization.json)
 
@@ -92,5 +90,5 @@ dependencies {
     implementation(Libs.Ktor.logging)
     implementation(Libs.Ktor.negotiation)
     
-    implementation("ch.qos.logback:logback-classic:1.5.3")
+    //implementation("ch.qos.logback:logback-classic:1.5.3")
 }
