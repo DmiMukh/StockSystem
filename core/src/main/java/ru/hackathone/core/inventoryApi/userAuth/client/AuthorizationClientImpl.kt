@@ -23,7 +23,7 @@ class AuthorizationClientImpl(private val client: HttpClient) : AuthorizationCli
     override suspend fun signIn(login: String, password: String): HttpResponse {
         return client.post("$addr/auth/sign-in") {
             contentType(ContentType.Application.Json)
-            setBody(Json.encodeToString(AuthorizationRequest(login, password)))
+            setBody(AuthorizationRequest(login, password))
         }
     }
 
@@ -35,7 +35,7 @@ class AuthorizationClientImpl(private val client: HttpClient) : AuthorizationCli
     override suspend fun signUp(fullName:String, login: String, password: String, roleId: Int): HttpResponse {
         return client.post("$addr/auth/sign-up") {
             contentType(ContentType.Application.Json)
-            setBody(Json.encodeToString(RegistrationRequest(fullName, login, password, roleId)))
+            setBody(RegistrationRequest(fullName, login, password, roleId))
         }
     }
 }
