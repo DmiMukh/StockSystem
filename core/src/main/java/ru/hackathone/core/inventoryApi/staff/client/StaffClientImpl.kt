@@ -32,21 +32,21 @@ class StaffClientImpl(private val client: HttpClient) : StaffClient {
     override suspend fun createTask(task: Task): HttpResponse {
         return client.post("$addr/task/create") {
             contentType(ContentType.Application.Json)
-            setBody(Json.encodeToJsonElement(task))
+            setBody(task)
         }
     }
 
     override suspend fun updateTask(taskId: Int, task: Task): HttpResponse {
         return client.put("$addr/task/$taskId") {
             contentType(ContentType.Application.Json)
-            setBody(Json.encodeToJsonElement(task))
+            setBody(task)
         }
     }
 
     override suspend fun deleteTask(taskId: Int): HttpResponse {
         return client.delete("$addr/task/delete") {
             contentType(ContentType.Application.Json)
-            setBody(Json.encodeToJsonElement(taskId))
+            setBody(taskId)
         }
     }
 
