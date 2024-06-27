@@ -1,14 +1,13 @@
 package ru.hackathone.core.inventoryApi.staff.models
-
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Task(
+data class Staff(
     val id: Int,
-    val title: String,
-    val description: String,
-    @SerialName("status_id")
-    val statusId: Int,
-    val userId: Int
+    val login: String,
+    @SerialName("role_id")
+    val roleId: Int,
+    @SerialName("full_name")
+    val fullName: String
 )

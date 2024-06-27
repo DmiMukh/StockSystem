@@ -1,7 +1,7 @@
 package ru.hackathone.core.inventoryApi.product.clientsInterfaces
 
 import io.ktor.client.statement.HttpResponse
-import ru.hackathone.core.inventoryApi.product.dto.Product
+import ru.hackathone.core.inventoryApi.product.models.Product
 
 interface ProductClient {
     suspend fun create(product: Product): HttpResponse

@@ -3,25 +3,34 @@ package ru.hackathone.core.inventoryApi.userAuth.service
 import android.content.res.Resources.NotFoundException
 import io.ktor.client.call.body
 import io.ktor.http.HttpStatusCode
+import ru.hackathone.core.inventoryApi.exceptions.AlreadyReportedException
 import ru.hackathone.core.inventoryApi.exceptions.BadRequestException
 import ru.hackathone.core.inventoryApi.exceptions.UnknownStatusCodeException
 import ru.hackathone.core.inventoryApi.userAuth.client.AuthorizationClient
 import ru.hackathone.core.inventoryApi.userAuth.dto.SignInResponse
 import ru.hackathone.core.inventoryApi.userAuth.dto.SignUpResponse
 
+/**
+ * NoTransformationFoundException if responded json don't match DTO Class
+ * BadRequestException if server responded 400 aka wrong parameters
+ * UnknownStatusCodeException for else responded statuses
+ * NotFoundException 404
+ */
 class AuthorizationServiceImpl(private var client: AuthorizationClient) : AuthorizationService {
-    /**
-    Sign-Up with the provided login and password.
+
+    /** Sign-Up with the provided login and password.
     @login : String
     @password : String
     @return role-id: Int
     Can trow:
-    NoTransformationFoundException if responded json don't match DTO Class
-    BadRequestException if server responded 400 aka wrong parameters
-    UnknownStatusCodeException for else responded statuses
-    NotFoundException 404 */
-    override suspend fun signUp(login: String, password: String): Int {
-        val response = client.signUp(login, password)
+    AlreadyReportedException if user trying sing-up several times*/
+    override suspend fun signUp(
+        fullName: String,
+        login: String,
+        password: String,
+        roleId: Int
+    ): Int {
+        val response = client.signUp(fullName, login, password, roleId)
         when (response.status) {
             HttpStatusCode.OK -> {
                 val signUpResponse = response.body<SignUpResponse>()
@@ -30,6 +39,7 @@ class AuthorizationServiceImpl(private var client: AuthorizationClient) : Author
 
             HttpStatusCode.BadRequest -> throw BadRequestException()
             HttpStatusCode.NotFound -> throw NotFoundException()
+            HttpStatusCode.fromValue(208) -> throw AlreadyReportedException()
             else -> throw UnknownStatusCodeException()
         }
     }
@@ -40,10 +50,7 @@ class AuthorizationServiceImpl(private var client: AuthorizationClient) : Author
     @password : String
     @return token : String
     Can trow:
-    NoTransformationFoundException if responded json don't match DTO Class
-    BadRequestException if server responded 400 aka wrong parameters
-    UnknownStatusCodeException for else responded statuses
-    NotFoundException 404 */
+     */
     override suspend fun signIn(login: String, password: String): String {
         val response = client.signIn(login, password)
         when (response.status) {

@@ -1,6 +1,7 @@
 package ru.hackathone.core.inventoryapi.auth
 
 import kotlinx.coroutines.runBlocking
+import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotEquals
 import org.junit.Test
 import ru.hackathone.core.inventoryApi.userAuth.client.AuthorizationClientImpl
@@ -17,18 +18,21 @@ class AuthServiceTest {
     private val authService = AuthorizationServiceImpl(authClient)
 
     @Test
-    fun signInCorrectRequest() {
+    fun signUpCorrectRequest() {
         runBlocking {
-            val token = authService.signIn("kotlin", "123")
-            assertNotEquals(token, null)
+            val roleId = 1;
+            val expectedId = authService.signUp("Linus Torwalds", "kotlin", "123", roleId)
+            println("role-id = $expectedId")
+            assertEquals(roleId, expectedId)
         }
     }
 
     @Test
-    fun signUpCorrectRequest() {
+    fun signInCorrectRequest() {
         runBlocking {
-            val id = authService.signIn("kotlin", "123")
-            assertNotEquals(id, null)
+            val token = authService.signIn("kotlin", "123")
+            println("token = $token")
+            assertNotEquals(token, null)
         }
     }
 }

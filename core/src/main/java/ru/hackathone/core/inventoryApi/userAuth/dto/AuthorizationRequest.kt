@@ -4,4 +4,7 @@ import kotlinx.serialization.Serializable
 
 
 @Serializable
-data class AuthorizationRequest(val login: String, val password: String)
+data class AuthorizationRequest(
+    val login: String,
+    val password: String
+)
