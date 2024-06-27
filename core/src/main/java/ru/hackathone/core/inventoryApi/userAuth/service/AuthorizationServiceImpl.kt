@@ -20,8 +20,8 @@ class AuthorizationServiceImpl(private var client: AuthorizationClient) : Author
     BadRequestException if server responded 400 aka wrong parameters
     UnknownStatusCodeException for else responded statuses
     NotFoundException 404 */
-    override suspend fun signUp(login: String, password: String): Int {
-        val response = client.signUp(login, password)
+    override suspend fun signUp(fullName:String, login: String, password: String, roleId: Int): Int {
+        val response = client.signUp(fullName, login, password, roleId)
         when (response.status) {
             HttpStatusCode.OK -> {
                 val signUpResponse = response.body<SignUpResponse>()

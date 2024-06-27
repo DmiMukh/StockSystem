@@ -9,6 +9,7 @@ import io.ktor.http.contentType
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import ru.hackathone.core.inventoryApi.userAuth.dto.AuthorizationRequest
+import ru.hackathone.core.inventoryApi.userAuth.dto.RegistrationRequest
 
 
 class AuthorizationClientImpl(private val client: HttpClient) : AuthorizationClient {
@@ -31,10 +32,10 @@ class AuthorizationClientImpl(private val client: HttpClient) : AuthorizationCli
     @param login
     @param password
     @return a int role_id and response status 200:OK or 400: BAD REQUEST */
-    override suspend fun signUp(login: String, password: String): HttpResponse {
-        return client.post("$addr/auth/sign-in") {
+    override suspend fun signUp(fullName:String, login: String, password: String, roleId: Int): HttpResponse {
+        return client.post("$addr/auth/sign-up") {
             contentType(ContentType.Application.Json)
-            setBody(Json.encodeToString(AuthorizationRequest(login, password)))
+            setBody(Json.encodeToString(RegistrationRequest(fullName, login, password, roleId)))
         }
     }
 }
