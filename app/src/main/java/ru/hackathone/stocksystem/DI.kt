@@ -5,10 +5,13 @@ import ru.hackathone.core.ComponentFactory
 import ru.hackathone.core.coreModule
 import ru.hackathone.stocksystem.home.HomeComponent
 import ru.hackathone.stocksystem.home.RealHomeComponent
+import ru.hackathone.stocksystem.settings.RealSettingsComponent
+import ru.hackathone.stocksystem.settings.SettingsComponent
 import ru.hackathone.stocksystem.signin.RealSignInComponent
 import ru.hackathone.stocksystem.signin.SignInComponent
 import ru.hackathone.stocksystem.splash.RealSplashComponent
 import ru.hackathone.stocksystem.splash.SplashComponent
+import org.koin.core.component.get
 
 val allModules = listOf(
     coreModule
@@ -23,6 +26,17 @@ fun ComponentFactory.createHomeComponent(
         componentContext = componentContext,
         onProduct = onProduct,
         onStaff = onStaff
+    )
+}
+
+fun ComponentFactory.createSettingsComponent(
+    componentContext: ComponentContext,
+    onBack: () -> Unit
+): SettingsComponent {
+    return RealSettingsComponent(
+        componentContext = componentContext,
+        onBack = onBack,
+        storage = get()
     )
 }
 

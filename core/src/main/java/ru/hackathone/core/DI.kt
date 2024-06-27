@@ -26,10 +26,13 @@ import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 import ru.hackathone.core.inventoryApi.userAuth.service.AuthorizationServiceImpl
+import ru.hackathone.core.storage.SettingsStorage
+import ru.hackathone.core.storage.SettingsStorageImpl
 
 val coreModule = module {
     single<CoroutineScope> { provideAppScope() }
     single<MessageService> { MessageServiceImpl() }
+    single<SettingsStorage> { SettingsStorageImpl(context = get()) }
     single<AuthorizationClient> { AuthorizationClientImpl(client = provideKtorHttpClient()) }
     single<AuthorizationServiceImpl> { AuthorizationServiceImpl(client = get<AuthorizationClientImpl>()) }
 }
