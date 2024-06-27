@@ -1,6 +1,7 @@
 package ru.hackathone.stocksystem.signin
 
 import com.arkivanov.decompose.ComponentContext
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -8,6 +9,7 @@ import ru.hackathone.core.utils.componentCoroutineScope
 
 class RealSignInComponent(
     componentContext: ComponentContext,
+    private val onSignInComplete: () -> Unit
 ) : ComponentContext by componentContext, SignInComponent {
 
     override val login = MutableStateFlow("")
@@ -36,10 +38,11 @@ class RealSignInComponent(
     override fun onSignInClick() {
         coroutineScope.launch {
             inProgress.value = true
-            TODO("Авторизация через репозиторий")
+            delay(3000)
+            //TODO("Авторизация через репозиторий")
             inProgress.value = false
 
-            TODO("Навигация на экран")
+            onSignInComplete.invoke()
         }
     }
 }

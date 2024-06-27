@@ -23,10 +23,12 @@ fun ComponentFactory.createHomeComponent(
 }
 
 fun ComponentFactory.createSignInComponent(
-    componentContext: ComponentContext
+    componentContext: ComponentContext,
+    onSignInComplete: () -> Unit
 ): SignInComponent {
     return RealSignInComponent(
-        componentContext = componentContext
+        componentContext = componentContext,
+        onSignInComplete = onSignInComplete
     )
 }
 

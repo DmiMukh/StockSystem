@@ -18,6 +18,7 @@ interface SignInComponent {
     fun onPasswordChanged(password: String)
 
     fun onVisibilityChanged(visibility: Boolean)
+
     fun onSignInClick()
 
 }
