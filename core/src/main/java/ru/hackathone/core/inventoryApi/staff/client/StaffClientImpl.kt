@@ -9,10 +9,7 @@ import io.ktor.client.request.setBody
 import io.ktor.client.statement.HttpResponse
 import io.ktor.http.ContentType
 import io.ktor.http.contentType
-import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.encodeToJsonElement
 import ru.hackathone.core.inventoryApi.staff.models.Task
-import ru.hackathone.core.inventoryApi.staff.models.TaskStatus
 
 class StaffClientImpl(private val client: HttpClient) : StaffClient {
     private val addr = "http://localhost:8090"
@@ -21,14 +18,13 @@ class StaffClientImpl(private val client: HttpClient) : StaffClient {
         return client.get("$addr/task/")
     }
 
-    override suspend fun getTaskListByStatus(taskStatus: TaskStatus): HttpResponse {
-        return client.get("$addr/task/status/$taskStatus")
+    override suspend fun getTaskListByStatus(statusName: String): HttpResponse {
+        return client.get("$addr/task/$statusName")
     }
 
-    override suspend fun getTaskById(taskId: Int): HttpResponse {
-        TODO("Not yet implemented")
-    }
-
+    /**
+     * can throw AlreadyReportedException
+     */
     override suspend fun createTask(task: Task): HttpResponse {
         return client.post("$addr/task/create") {
             contentType(ContentType.Application.Json)
@@ -43,22 +39,23 @@ class StaffClientImpl(private val client: HttpClient) : StaffClient {
         }
     }
 
-    override suspend fun deleteTask(taskId: Int): HttpResponse {
-        return client.delete("$addr/task/delete") {
+    override suspend fun deleteTask(taskId: Int, statusId: Int): HttpResponse {
+        return client.delete("$addr/task/delete/$taskId") {
             contentType(ContentType.Application.Json)
-            setBody(taskId)
+            setBody(statusId)
         }
     }
 
     override suspend fun getStatusList(): HttpResponse {
-        return client.get("$addr/status")
+        return client.get("$addr/status/")
     }
+
 
     override suspend fun getStaffList(): HttpResponse {
-        return client.get("$addr/managment/")
+        return client.get("$addr/management/")
     }
 
-    override suspend fun getWorkedTasksById(taskId: Int): HttpResponse {
+    override suspend fun getWorkerTasksById(taskId: Int): HttpResponse {
         return client.get("$addr/$taskId")
     }
 

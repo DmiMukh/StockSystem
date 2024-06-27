@@ -34,8 +34,8 @@ class StaffServiceImpl(val client: StaffClient) : StaffService {
         }
     }
 
-    override suspend fun getTaskListByStatus(taskStatus: TaskStatus): Array<Task> {
-        val response = client.getTaskListByStatus(taskStatus)
+    override suspend fun getTaskListByStatus(statusName: String): Array<Task> {
+        val response = client.getTaskListByStatus(statusName)
         when (response.status) {
             HttpStatusCode.OK -> {
                 return response.body<Array<Task>>()
@@ -47,21 +47,9 @@ class StaffServiceImpl(val client: StaffClient) : StaffService {
         }
     }
 
-    override suspend fun getTaskById(taskId: Int): Task {
-        val response = client.getTaskById(taskId)
-        when (response.status) {
-            HttpStatusCode.OK -> {
-                return response.body<Task>()
-            }
 
-            HttpStatusCode.NotFound -> throw NotFoundException()
-            HttpStatusCode.BadRequest -> throw BadRequestException()
-            else -> throw UnknownStatusCodeException()
-        }
-    }
-
-    override suspend fun getWorkedTasksById(taskId: Int): Array<Task> {
-        val response = client.getWorkedTasksById(taskId)
+    override suspend fun getWorkerTasksById(taskId: Int): Array<Task> {
+        val response = client.getWorkerTasksById(taskId)
         when (response.status) {
             HttpStatusCode.OK -> {
                 return response.body<Array<Task>>()
@@ -100,6 +88,9 @@ class StaffServiceImpl(val client: StaffClient) : StaffService {
         }
     }
 
+    /**
+     * can throw AlreadyReportedException
+     */
     override suspend fun createTask(task: Task) {
         client.createTask(task)
     }
@@ -108,8 +99,8 @@ class StaffServiceImpl(val client: StaffClient) : StaffService {
         client.updateTask(taskId, task)
     }
 
-    override suspend fun deleteTask(taskId: Int) {
-        client.deleteTask(taskId)
+    override suspend fun deleteTask(taskId: Int, statusId: Int) {
+        client.deleteTask(taskId, statusId)
     }
 
     override suspend fun assignTask(workerId: Int, taskId: Int) {
