@@ -5,6 +5,8 @@ import ru.hackathone.core.ComponentFactory
 import ru.hackathone.core.coreModule
 import ru.hackathone.stocksystem.home.HomeComponent
 import ru.hackathone.stocksystem.home.RealHomeComponent
+import ru.hackathone.stocksystem.signin.RealSignInComponent
+import ru.hackathone.stocksystem.signin.SignInComponent
 import ru.hackathone.stocksystem.splash.RealSplashComponent
 import ru.hackathone.stocksystem.splash.SplashComponent
 
@@ -13,10 +15,24 @@ val allModules = listOf(
 )
 
 fun ComponentFactory.createHomeComponent(
-    componentContext: ComponentContext
+    componentContext: ComponentContext,
+    onProduct: () -> Unit,
+    onStaff: () -> Unit
 ): HomeComponent {
     return RealHomeComponent(
-        componentContext = componentContext
+        componentContext = componentContext,
+        onProduct = onProduct,
+        onStaff = onStaff
+    )
+}
+
+fun ComponentFactory.createSignInComponent(
+    componentContext: ComponentContext,
+    onSignInComplete: () -> Unit
+): SignInComponent {
+    return RealSignInComponent(
+        componentContext = componentContext,
+        onSignInComplete = onSignInComplete
     )
 }
 

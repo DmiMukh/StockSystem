@@ -2,6 +2,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("kotlin-parcelize")
+    kotlin(Libs.KotlinX.Serialization.plugin) version Libs.KotlinX.Serialization.pluginVersion
 }
 
 android {
@@ -62,7 +63,8 @@ dependencies {
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
-    implementation("androidx.compose.material3:material3")
+    //implementation("androidx.compose.material3:material3")
+    implementation("androidx.compose.material3:material3-android:1.2.1")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
@@ -84,4 +86,9 @@ dependencies {
     implementation(Libs.Koin.core)
     implementation(Libs.Koin.android)
     implementation(Libs.Koin.compose)
+
+    // KotlinX
+    implementation(Libs.KotlinX.Datetime.core)
+    implementation(Libs.KotlinX.Serialization.contentNegotation)
+    implementation(Libs.KotlinX.Serialization.json)
 }

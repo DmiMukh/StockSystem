@@ -1,7 +1,6 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
-    id("kotlin-parcelize")
     kotlin(Libs.KotlinX.Serialization.plugin) version Libs.KotlinX.Serialization.pluginVersion
 }
 
@@ -53,7 +52,8 @@ dependencies {
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
-    implementation("androidx.compose.material3:material3")
+    //implementation("androidx.compose.material3:material3")
+    implementation("androidx.compose.material3:material3-android:1.2.1")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
@@ -86,18 +86,11 @@ dependencies {
     implementation(Libs.KotlinX.Serialization.json)
 
     //Ktor
-    val ktor_version = "2.3.12"
-    implementation("io.ktor:ktor-client-core:$ktor_version")
-    implementation("io.ktor:ktor-client-android:$ktor_version")
-    implementation("io.ktor:ktor-client-content-negotiation:$ktor_version")
-
-    //Serialization
-    implementation("io.ktor:ktor-client-json:$ktor_version")
-    implementation("io.ktor:ktor-client-serialization:$ktor_version")
-    implementation("io.ktor:ktor-serialization-kotlinx-json:$ktor_version")
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
-
-    //Ktor logging
-    implementation("io.ktor:ktor-client-logging:$ktor_version")
+    implementation(Libs.Ktor.core)
+    implementation(Libs.Ktor.android)
+    implementation(Libs.Ktor.serialization)
+    implementation(Libs.Ktor.logging)
+    implementation(Libs.Ktor.negotiation)
+    
     implementation("ch.qos.logback:logback-classic:1.5.3")
 }
