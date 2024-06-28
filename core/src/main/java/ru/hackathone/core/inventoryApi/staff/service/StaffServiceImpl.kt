@@ -6,6 +6,7 @@ import io.ktor.http.HttpStatusCode
 import ru.hackathone.core.inventoryApi.exceptions.BadRequestException
 import ru.hackathone.core.inventoryApi.exceptions.UnknownStatusCodeException
 import ru.hackathone.core.inventoryApi.staff.client.StaffClient
+import ru.hackathone.core.inventoryApi.staff.dto.TaskRequest
 import ru.hackathone.core.inventoryApi.staff.models.Staff
 import ru.hackathone.core.inventoryApi.staff.models.Task
 import ru.hackathone.core.inventoryApi.staff.models.TaskStatus
@@ -91,11 +92,11 @@ class StaffServiceImpl(val client: StaffClient) : StaffService {
     /**
      * can throw AlreadyReportedException
      */
-    override suspend fun createTask(task: Task) {
+    override suspend fun createTask(task: TaskRequest) {
         client.createTask(task)
     }
 
-    override suspend fun updateTask(taskId: Int, task: Task) {
+    override suspend fun updateTask(taskId: Int, task: TaskRequest) {
         client.updateTask(taskId, task)
     }
 

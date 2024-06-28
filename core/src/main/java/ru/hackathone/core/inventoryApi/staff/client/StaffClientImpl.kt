@@ -9,11 +9,12 @@ import io.ktor.client.request.setBody
 import io.ktor.client.statement.HttpResponse
 import io.ktor.http.ContentType
 import io.ktor.http.contentType
-import ru.hackathone.core.inventoryApi.staff.models.Task
+import ru.hackathone.core.inventoryApi.staff.dto.TaskRequest
 
-class StaffClientImpl(private val client: HttpClient) : StaffClient {
-    private val addr = "http://localhost:8090"
-
+class StaffClientImpl(
+    private val client: HttpClient,
+    private val addr: String = "http://localhost:8090"
+) : StaffClient {
     override suspend fun getTaskList(): HttpResponse {
         return client.get("$addr/task/")
     }
@@ -25,14 +26,14 @@ class StaffClientImpl(private val client: HttpClient) : StaffClient {
     /**
      * can throw AlreadyReportedException
      */
-    override suspend fun createTask(task: Task): HttpResponse {
+    override suspend fun createTask(task: TaskRequest): HttpResponse {
         return client.post("$addr/task/create") {
             contentType(ContentType.Application.Json)
             setBody(task)
         }
     }
 
-    override suspend fun updateTask(taskId: Int, task: Task): HttpResponse {
+    override suspend fun updateTask(taskId: Int, task: TaskRequest): HttpResponse {
         return client.put("$addr/task/$taskId") {
             contentType(ContentType.Application.Json)
             setBody(task)
