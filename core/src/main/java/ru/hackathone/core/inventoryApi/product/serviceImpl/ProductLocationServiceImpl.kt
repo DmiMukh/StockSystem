@@ -10,11 +10,12 @@ import ru.hackathone.core.inventoryApi.product.client.ProductLocationClient
 import ru.hackathone.core.inventoryApi.product.dto.ProductLocationRequest
 import ru.hackathone.core.inventoryApi.product.models.ProductLocation
 import ru.hackathone.core.inventoryApi.product.service.ProductLocationService
+import ru.hackathone.core.inventoryApi.staff.models.Id
 
 class ProductLocationServiceImpl(private val client: ProductLocationClient) :
     ProductLocationService {
     override suspend fun createProductLocation(location: ProductLocationRequest): Int {
-        return client.createProductLocation(location).body<Int>()
+        return client.createProductLocation(location).body<Id>().id
     }
 
     override suspend fun deleteProductLocation(locationId: Int) {

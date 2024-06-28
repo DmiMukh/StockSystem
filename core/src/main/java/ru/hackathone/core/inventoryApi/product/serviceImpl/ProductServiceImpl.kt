@@ -10,10 +10,11 @@ import ru.hackathone.core.inventoryApi.product.dto.ProductRequest
 import ru.hackathone.core.inventoryApi.product.models.Product
 import ru.hackathone.core.inventoryApi.product.models.ProductLocation
 import ru.hackathone.core.inventoryApi.product.service.ProductService
+import ru.hackathone.core.inventoryApi.staff.models.Id
 
 class ProductServiceImpl(private val client: ProductClient) : ProductService {
     override suspend fun createProduct(product: ProductRequest): Int {
-        return client.createProduct(product).body<Int>()
+        return client.createProduct(product).body<Id>().id
     }
 
     override suspend fun updateProduct(productId: Int, product: ProductRequest) {

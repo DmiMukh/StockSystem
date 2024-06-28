@@ -6,6 +6,7 @@ import ru.hackathone.core.inventoryApi.exceptions.NoContentException
 import ru.hackathone.core.inventoryApi.exceptions.UnknownStatusCodeException
 import ru.hackathone.core.inventoryApi.staff.client.StaffClient
 import ru.hackathone.core.inventoryApi.staff.dto.TaskRequest
+import ru.hackathone.core.inventoryApi.staff.models.Id
 import ru.hackathone.core.inventoryApi.staff.models.Staff
 import ru.hackathone.core.inventoryApi.staff.models.Task
 import ru.hackathone.core.inventoryApi.staff.models.TaskStatus
@@ -99,7 +100,7 @@ class StaffServiceImpl(val client: StaffClient) : StaffService {
      * can throw AlreadyReportedException
      */
     override suspend fun createTask(task: TaskRequest): Int {
-        return client.createTask(task).body<Int>()
+        return client.createTask(task).body<Id>().id
     }
 
     override suspend fun updateTask(taskId: Int, task: TaskRequest) {

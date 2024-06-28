@@ -1,9 +1,7 @@
 package ru.hackathone.core.inventoryapi.staff
 
 import kotlinx.coroutines.runBlocking
-import org.junit.After
 import org.junit.Assert.assertEquals
-import org.junit.Before
 import org.junit.Test
 import ru.hackathone.core.inventoryApi.staff.client.StaffClientImpl
 import ru.hackathone.core.inventoryApi.staff.dto.TaskRequest
@@ -26,38 +24,29 @@ class CreateAndGetTest {
         4
     )
 
-    @Before
-    fun getBefore() = runBlocking {
-        val tasklist = service.getTaskList()
-        println(tasklist.size)
-        println("task list = $tasklist")
-    }
-
     @Test
     fun createTask1() = runBlocking() {
-        val id = service.createTask(task1)
-        val taskList = service.getTaskList()
+        val taskList1 = service.getTaskList()
+        val size1 = taskList1.size
 
-        println(taskList)
-        val count = taskList.size
-        assertEquals(count - 1, id)
+        val id = service.createTask(task1)
+        println("Id = $id")
+        val taskList2 = service.getTaskList()
+        val size2 = taskList2.size
+        println(taskList2)
+        assertEquals(size1 + 1, size2)
     }
 
     @Test
     fun createTask2() = runBlocking() {
+        val taskList1 = service.getTaskList()
+        val size1 = taskList1.size
 
         val id = service.createTask(task2)
-        val taskList = service.getTaskList()
 
-        println(taskList)
-        val count = taskList.size
-        assertEquals(count - 1, id)
-    }
-
-    @After
-    fun gets() = runBlocking {
-        val tasklist = service.getTaskList()
-        println(tasklist.size)
-        println("task list = $tasklist")
+        val taskList2 = service.getTaskList()
+        val size2 = taskList2.size
+        println(taskList2)
+        assertEquals(size1 + 1, size2)
     }
 }
