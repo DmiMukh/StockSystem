@@ -49,8 +49,8 @@ class StaffServiceImpl(val client: StaffClient) : StaffService {
     }
 
 
-    override suspend fun getWorkerTasksById(taskId: Int): Array<Task> {
-        val response = client.getWorkerTasksById(taskId)
+    override suspend fun getWorkerTasksById(workerId: Int): Array<Task> {
+        val response = client.getWorkerTasksById(workerId)
         when (response.status) {
             HttpStatusCode.OK -> {
                 return response.body<Array<Task>>()

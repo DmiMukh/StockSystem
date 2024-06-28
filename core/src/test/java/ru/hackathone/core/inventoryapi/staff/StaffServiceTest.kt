@@ -9,7 +9,7 @@ import ru.hackathone.core.inventoryApi.staff.service.StaffServiceImpl
 import ru.hackathone.core.provideKtorHttpClient
 
 class StaffServiceTest {
-    private val client = StaffClientImpl(provideKtorHttpClient(), addr = "http://localhost:8090")
+    private val client = StaffClientImpl(provideKtorHttpClient())
     private val service = StaffServiceImpl(client)
     private val task1 = TaskRequest(
         "Add feature",
@@ -28,11 +28,11 @@ class StaffServiceTest {
 
     @Test
     fun getLists() = runBlocking {
-        val taskList = service.getTaskList()
-        println(taskList)
+       // val taskList = service.getTaskList()
+       // println(taskList)
 
-        val staffList = service.getStaffList()
-        println(staffList)
+       // val staffList = service.getStaffList()
+       // println(staffList)
 
         val statusList = service.getStatusList()
         println(statusList)

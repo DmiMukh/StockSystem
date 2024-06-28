@@ -16,7 +16,7 @@ class StaffClientImpl(
     private val addr: String = "http://localhost:8000"
 ) : StaffClient {
     override suspend fun getTaskList(): HttpResponse {
-        return client.get("$addr/task/")
+        return client.get("$addr/task")
     }
 
     override suspend fun getTaskListByStatus(statusName: String): HttpResponse {
@@ -48,19 +48,19 @@ class StaffClientImpl(
     }
 
     override suspend fun getStatusList(): HttpResponse {
-        return client.get("$addr/status/")
+        return client.get("$addr/task/status")
     }
 
 
     override suspend fun getStaffList(): HttpResponse {
-        return client.get("$addr/management/")
+        return client.get("$addr/management")
     }
 
     override suspend fun getWorkerTasksById(taskId: Int): HttpResponse {
-        return client.get("$addr/$taskId")
+        return client.get("$addr/management/$taskId")
     }
 
     override suspend fun assignTask(workerId: Int, taskId: Int): HttpResponse {
-        return client.post("$addr/$workerId/task/$taskId")
+        return client.post("$addr/management/$workerId/task/$taskId")
     }
 }

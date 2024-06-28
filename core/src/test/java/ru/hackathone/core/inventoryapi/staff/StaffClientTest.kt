@@ -80,7 +80,8 @@ class StaffClientTest {
     }
 
     @Test
-    fun assignTask() {
-        //val response = client.assignTask()
+    fun assignTask() = runBlocking {
+        val response = client.assignTask(0, 0)
+        assertEquals(1, 0)
     }
 }

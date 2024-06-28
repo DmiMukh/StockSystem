@@ -16,7 +16,7 @@ interface StaffService {
     suspend fun getStatusList(): Array<TaskStatus>
 
     suspend fun getStaffList(): Array<Staff>
-    suspend fun getWorkerTasksById(taskId: Int): Array<Task>
+    suspend fun getWorkerTasksById(workerId: Int): Array<Task>
 
     suspend fun assignTask(workerId: Int, taskId: Int)
 }
