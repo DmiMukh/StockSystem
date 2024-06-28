@@ -37,7 +37,7 @@ class RealProductRootComponent(
         is ChildConfig.Details -> ProductRootComponent.Child.Details(
             component = this.componentFactory.createProductDetailsComponent(
                 componentContext = componentContext,
-                oldProduct = config.product,
+                product = config.product,
                 onBack = { navigation.pop() }
             )
         )

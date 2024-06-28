@@ -37,12 +37,12 @@ fun ComponentFactory.createProductListComponent(
 
 fun ComponentFactory.createProductDetailsComponent(
     componentContext: ComponentContext,
-    oldProduct: Product,
+    product: Product,
     onBack: () -> Unit
 ) : ProductDetailsComponent {
     return RealProductDetailsComponent(
         componentContext = componentContext,
-        oldProduct = oldProduct,
+        product = product,
         onBack = onBack
     )
 }
