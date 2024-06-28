@@ -5,6 +5,9 @@ import com.arkivanov.essenty.instancekeeper.InstanceKeeper
 import com.arkivanov.essenty.instancekeeper.getOrCreate
 import kotlinx.coroutines.flow.MutableStateFlow
 import ru.hackathone.core.storage.SettingsStorage
+import ru.hackathone.core.utils.AUTH_HOST_PATH
+import ru.hackathone.core.utils.PRODUCT_HOST_PATH
+import ru.hackathone.core.utils.STAFF_HOST_PATH
 import ru.hackathone.stocksystem.settings.toolbar.RealSettingsToolbarComponent
 
 class RealSettingsComponent(

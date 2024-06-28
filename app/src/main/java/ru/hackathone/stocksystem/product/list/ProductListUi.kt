@@ -41,7 +41,6 @@ fun ProductListUi(component: ProductListComponent){
                 Text(text = "Count:", modifier = Modifier.padding(end = 4.dp))
                 Text(text = "0")
             }
-
         }
     }
 }
