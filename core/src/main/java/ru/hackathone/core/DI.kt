@@ -25,16 +25,34 @@ import io.ktor.client.statement.HttpResponse
 import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
+import ru.hackathone.core.inventoryApi.staff.client.StaffClient
+import ru.hackathone.core.inventoryApi.staff.client.StaffClientImpl
+import ru.hackathone.core.inventoryApi.staff.service.StaffService
+import ru.hackathone.core.inventoryApi.staff.service.StaffServiceImpl
 import ru.hackathone.core.inventoryApi.userAuth.service.AuthorizationServiceImpl
 import ru.hackathone.core.storage.SettingsStorage
 import ru.hackathone.core.storage.SettingsStorageImpl
+import ru.hackathone.core.utils.AUTH_HOST_PATH
+import ru.hackathone.core.utils.STAFF_HOST_PATH
 
 val coreModule = module {
     single<CoroutineScope> { provideAppScope() }
     single<MessageService> { MessageServiceImpl() }
     single<SettingsStorage> { SettingsStorageImpl(context = get()) }
-    single<AuthorizationClient> { AuthorizationClientImpl(client = provideKtorHttpClient()) }
+    single<AuthorizationClient> {
+        AuthorizationClientImpl(
+            client = provideKtorHttpClient(),
+            addr = "http://".plus(get<SettingsStorage>().getString(AUTH_HOST_PATH))
+        )
+    }
     single<AuthorizationServiceImpl> { AuthorizationServiceImpl(client = get<AuthorizationClientImpl>()) }
+    single<StaffClient> {
+        StaffClientImpl(
+            client = provideKtorHttpClient(),
+            addr = "http://".plus(get<SettingsStorage>().getString(STAFF_HOST_PATH))
+        )
+    }
+    single<StaffService> { StaffServiceImpl(client = get()) }
 }
 
 fun ComponentFactory.createMessageComponent(

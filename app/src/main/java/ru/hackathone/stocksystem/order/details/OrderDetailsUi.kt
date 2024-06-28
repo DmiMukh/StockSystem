@@ -17,6 +17,7 @@ fun OrderDetailsUi(component: OrderDetailsComponent) {
         Column(
             modifier = Modifier.padding(paddingValues)
         ) {
+
         }
     }
 }

@@ -9,6 +9,7 @@ import com.arkivanov.essenty.parcelable.Parcelable
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.parcelize.Parcelize
 import ru.hackathone.core.ComponentFactory
+import ru.hackathone.core.inventoryApi.staff.models.Task
 import ru.hackathone.core.utils.toStateFlow
 import ru.hackathone.stocksystem.order.createOrderDetailsComponent
 import ru.hackathone.stocksystem.order.createOrderListComponent
@@ -31,13 +32,14 @@ class RealOrderRootComponent(
         config: RealOrderRootComponent.ChildConfig,
         componentContext: ComponentContext
     ): OrderRootComponent.Child = when (config) {
-        ChildConfig.Details -> OrderRootComponent.Child.Details(
+        is ChildConfig.Details -> OrderRootComponent.Child.Details(
             component = this.componentFactory.createOrderDetailsComponent(
                 componentContext = componentContext,
+                task = config.task,
                 onBack = { navigation.pop() }
             )
         )
-        ChildConfig.List -> OrderRootComponent.Child.List(
+        is ChildConfig.List -> OrderRootComponent.Child.List(
             component = this.componentFactory.createOrderListComponent(
                 componentContext = componentContext,
                 onBack = { onBack.invoke() }
@@ -47,7 +49,7 @@ class RealOrderRootComponent(
 
     sealed interface ChildConfig : Parcelable {
         @Parcelize
-        object Details : ChildConfig
+        class Details(val task: Task) : ChildConfig
 
         @Parcelize
         object List : ChildConfig

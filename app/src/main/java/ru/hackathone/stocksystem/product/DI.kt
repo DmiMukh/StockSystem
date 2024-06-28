@@ -9,6 +9,7 @@ import ru.hackathone.stocksystem.product.list.RealProductListComponent
 import ru.hackathone.stocksystem.product.root.ProductRootComponent
 import ru.hackathone.stocksystem.product.root.RealProductRootComponent
 import org.koin.core.component.get
+import ru.hackathone.core.inventoryApi.product.models.Product
 
 
 fun ComponentFactory.createProductRootComponent(
@@ -24,20 +25,24 @@ fun ComponentFactory.createProductRootComponent(
 
 fun ComponentFactory.createProductListComponent(
     componentContext: ComponentContext,
-    onBack: () -> Unit
+    onBack: () -> Unit,
+    onDetails: (Product) -> Unit
 ) : ProductListComponent {
     return RealProductListComponent(
         componentContext = componentContext,
-        onBack = onBack
+        onBack = onBack,
+        onDetails = onDetails
     )
 }
 
 fun ComponentFactory.createProductDetailsComponent(
     componentContext: ComponentContext,
+    product: Product,
     onBack: () -> Unit
 ) : ProductDetailsComponent {
     return RealProductDetailsComponent(
         componentContext = componentContext,
+        product = product,
         onBack = onBack
     )
 }

@@ -40,15 +40,7 @@ fun ProductItem(
 fun ProductItemPreview(darkTheme: Boolean){
     AppTheme(darkTheme = darkTheme) {
         ProductItem(
-            model = Product(
-                id = 0,
-                name = "Product A",
-                quantity = 10,
-                description = "Some Product A description.",
-                categoryId = 0,
-                locationId = 0,
-                statusId = 0
-            ),
+            model = Product(),
             onClick = {}
         )
     }
