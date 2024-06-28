@@ -49,7 +49,7 @@ fun OrderListUi(component: OrderListComponent) {
                     }
                 }
                 OrderListState.Loading -> TODO()
-                OrderListState.NoItems -> OrderListNoItems()
+                OrderListState.NoItems -> OrderListNoItems(modifier = Modifier.padding(16.dp).align(Alignment.Center))
             }
         }
         Column(
