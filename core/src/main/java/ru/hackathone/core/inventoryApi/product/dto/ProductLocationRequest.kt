@@ -1,9 +1,9 @@
-package ru.hackathone.core.inventoryApi.product.models
+package ru.hackathone.core.inventoryApi.product.dto
+
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class ProductLocation(
-    val id: Int,
+data class ProductLocationRequest(
     val row: String,
     val place: String
 )
