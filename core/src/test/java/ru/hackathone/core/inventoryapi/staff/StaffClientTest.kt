@@ -9,7 +9,7 @@ import ru.hackathone.core.inventoryApi.staff.dto.TaskRequest
 import ru.hackathone.core.provideKtorHttpClient
 
 class StaffClientTest {
-    private val client = StaffClientImpl(provideKtorHttpClient(), addr = "http://localhost:8090")
+    private val client = StaffClientImpl(provideKtorHttpClient())
 
     @Test
     fun createTask() = runBlocking {

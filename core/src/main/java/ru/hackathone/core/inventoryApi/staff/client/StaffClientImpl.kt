@@ -13,7 +13,7 @@ import ru.hackathone.core.inventoryApi.staff.dto.TaskRequest
 
 class StaffClientImpl(
     private val client: HttpClient,
-    private val addr: String = "http://localhost:8090"
+    private val addr: String = "http://localhost:8000"
 ) : StaffClient {
     override suspend fun getTaskList(): HttpResponse {
         return client.get("$addr/task/")
