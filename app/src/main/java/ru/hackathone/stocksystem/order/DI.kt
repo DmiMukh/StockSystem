@@ -39,6 +39,7 @@ fun ComponentFactory.createOrderListComponent(
 ) : OrderListComponent {
     return RealOrderListComponent(
         componentContext = componentContext,
-        onBack = onBack
+        onBack = onBack,
+        service = get()
     )
 }
