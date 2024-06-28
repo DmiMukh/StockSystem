@@ -1,5 +1,6 @@
 package ru.hackathone.core
 
+import android.content.res.Resources.NotFoundException
 import com.arkivanov.decompose.ComponentContext
 import io.ktor.client.HttpClient
 import kotlinx.coroutines.CoroutineScope
@@ -23,8 +24,11 @@ import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logging
 import io.ktor.client.statement.HttpResponse
 import io.ktor.client.plugins.contentnegotiation.*
+import io.ktor.http.HttpStatusCode
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
+import ru.hackathone.core.inventoryApi.exceptions.BadRequestException
+import ru.hackathone.core.inventoryApi.exceptions.NoContentException
 import ru.hackathone.core.inventoryApi.staff.client.StaffClient
 import ru.hackathone.core.inventoryApi.staff.client.StaffClientImpl
 import ru.hackathone.core.inventoryApi.staff.service.StaffService
@@ -91,6 +95,9 @@ fun provideKtorHttpClient(): HttpClient {
                 val statusCode = response.status.value
 
                 when (statusCode) {
+                    404 -> throw NotFoundException()
+                    400 -> throw BadRequestException()
+                    204 -> throw NoContentException()
                     in 300..399 -> throw RedirectResponseException(response, response.toString())
                     in 400..499 -> throw ClientRequestException(response, response.toString())
                     in 500..599 -> throw ServerResponseException(response, response.toString())

@@ -14,10 +14,10 @@ import ru.hackathone.core.provideKtorHttpClient
 
 class ProductClientImpl(
     private val client: HttpClient = provideKtorHttpClient(),
-    val addr: String = "http://localhost:8090"
+    val addr: String = "http://localhost:8081"
 ) : ProductClient {
     override suspend fun createProduct(product: ProductRequest): HttpResponse {
-        return client.post("$addr/product/add") {
+        return client.post("$addr/product") {
             contentType(ContentType.Application.Json)
             setBody(product)
         }
@@ -37,5 +37,4 @@ class ProductClientImpl(
     override suspend fun getProductList(): HttpResponse {
         return client.get("$addr/product")
     }
-
 }

@@ -3,6 +3,7 @@ package ru.hackathone.core.inventoryApi.product.client
 import io.ktor.client.HttpClient
 import io.ktor.client.request.delete
 import io.ktor.client.request.get
+import io.ktor.client.request.post
 import io.ktor.client.request.put
 import io.ktor.client.request.setBody
 import io.ktor.client.statement.HttpResponse
@@ -13,10 +14,10 @@ import ru.hackathone.core.provideKtorHttpClient
 
 class ProductLocationClientImpl(
     private val client: HttpClient = provideKtorHttpClient(),
-    private val addr: String = "http://localhost"
+    private val addr: String = "http://localhost:8081"
 ) : ProductLocationClient {
     override suspend fun createProductLocation(location: ProductLocationRequest): HttpResponse {
-        return client.put("$addr/product/location/add") {
+        return client.post("$addr/product/location") {
             contentType(ContentType.Application.Json)
             setBody(location)
         }

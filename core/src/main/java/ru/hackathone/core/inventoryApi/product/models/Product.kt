@@ -1,10 +1,9 @@
 package ru.hackathone.core.inventoryApi.product.models
 
 import com.arkivanov.essenty.parcelable.Parcelable
-import kotlinx.parcelize.Parcelize
 import kotlinx.serialization.Serializable
 
-@Parcelize
+@kotlinx.parcelize.Parcelize
 @Serializable
 data class Product(
     val id: Int,

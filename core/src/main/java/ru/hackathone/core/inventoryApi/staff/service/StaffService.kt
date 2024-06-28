@@ -9,7 +9,7 @@ interface StaffService {
     suspend fun getTaskList(): Array<Task>
     suspend fun getTaskListByStatus(statusName: String): Array<Task>
 
-    suspend fun createTask(task: TaskRequest)
+    suspend fun createTask(task: TaskRequest):Int
     suspend fun updateTask(taskId: Int, task: TaskRequest)
     suspend fun deleteTask(taskId: Int, statusId: Int)
 

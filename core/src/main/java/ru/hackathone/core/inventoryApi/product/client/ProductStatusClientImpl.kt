@@ -7,7 +7,7 @@ import ru.hackathone.core.provideKtorHttpClient
 
 class ProductStatusClientImpl(
     private val client: HttpClient = provideKtorHttpClient(),
-    private val addr: String = "http://localhost"
+    private val addr: String = "http://localhost:8081"
 ) : ProductStatusClient {
     override suspend fun getProductStatusList(): HttpResponse {
         return client.get("$addr/product/status")

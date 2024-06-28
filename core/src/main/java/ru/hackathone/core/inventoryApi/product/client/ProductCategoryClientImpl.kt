@@ -7,7 +7,7 @@ import ru.hackathone.core.provideKtorHttpClient
 
 class ProductCategoryClientImpl(
     private val client: HttpClient = provideKtorHttpClient(),
-    private val addr: String = "http://localhost"
+    private val addr: String = "http://localhost:8081"
 ) : ProductCategoryClient {
     override suspend fun getProductCategoryList(): HttpResponse {
         return client.get("$addr/product/category")

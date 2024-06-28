@@ -20,14 +20,14 @@ class StaffClientImpl(
     }
 
     override suspend fun getTaskListByStatus(statusName: String): HttpResponse {
-        return client.get("$addr/task/$statusName")
+        return client.get("$addr/task/status/$statusName")
     }
 
     /**
      * can throw AlreadyReportedException
      */
     override suspend fun createTask(task: TaskRequest): HttpResponse {
-        return client.post("$addr/task/create") {
+        return client.post("$addr/task") {
             contentType(ContentType.Application.Json)
             setBody(task)
         }
@@ -41,7 +41,7 @@ class StaffClientImpl(
     }
 
     override suspend fun deleteTask(taskId: Int, statusId: Int): HttpResponse {
-        return client.delete("$addr/task/delete/$taskId") {
+        return client.delete("$addr/task/$taskId") {
             contentType(ContentType.Application.Json)
             setBody(statusId)
         }
