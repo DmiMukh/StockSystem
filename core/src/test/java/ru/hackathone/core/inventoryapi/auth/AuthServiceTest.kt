@@ -18,21 +18,19 @@ class AuthServiceTest {
     private val authService = AuthorizationServiceImpl(authClient)
 
     @Test
-    fun signUpCorrectRequest() {
-        runBlocking {
-            val roleId = 1;
-            val expectedId = authService.signUp("Linus Torwalds", "kotlin", "123", roleId)
-            println("role-id = $expectedId")
-            assertEquals(roleId, expectedId)
-        }
+    fun signUpCorrectRequest() = runBlocking {
+        val roleId = 1;
+        val expectedId = authService.signUp("Linus Torwalds", "kotlin", "123", roleId)
+        println("role-id = $expectedId")
+        assertEquals(roleId, expectedId)
     }
 
+
     @Test
-    fun signInCorrectRequest() {
-        runBlocking {
-            val token = authService.signIn("kotlin", "123")
-            println("token = $token")
-            assertNotEquals(token, null)
-        }
+    fun signInCorrectRequest() = runBlocking {
+        val token = authService.signIn("kotlin", "123")
+        println("token = $token")
+        assertNotEquals(token, null)
     }
+
 }
