@@ -1,7 +1,14 @@
 package ru.hackathone.core.inventoryApi.product.client
 
 import io.ktor.client.HttpClient
+import io.ktor.client.request.delete
+import io.ktor.client.request.get
+import io.ktor.client.request.post
+import io.ktor.client.request.put
+import io.ktor.client.request.setBody
 import io.ktor.client.statement.HttpResponse
+import io.ktor.http.ContentType
+import io.ktor.http.contentType
 import ru.hackathone.core.inventoryApi.product.dto.ProductRequest
 import ru.hackathone.core.provideKtorHttpClient
 
@@ -10,19 +17,25 @@ class ProductClientImpl(
     val addr: String = "http://localhost:8090"
 ) : ProductClient {
     override suspend fun createProduct(product: ProductRequest): HttpResponse {
-        TODO("Not yet implemented")
+        return client.post("$addr/product/add") {
+            contentType(ContentType.Application.Json)
+            setBody(product)
+        }
     }
 
     override suspend fun updateProduct(productId: Int, product: ProductRequest): HttpResponse {
-        TODO("Not yet implemented")
+        return client.put("$addr/product/$productId") {
+            contentType(ContentType.Application.Json)
+            setBody(product)
+        }
     }
 
     override suspend fun deleteProduct(productId: Int): HttpResponse {
-        TODO("Not yet implemented")
+        return client.delete("$addr/product/$productId")
     }
 
     override suspend fun getProductList(): HttpResponse {
-        TODO("Not yet implemented")
+        return client.get("$addr/product")
     }
 
 }

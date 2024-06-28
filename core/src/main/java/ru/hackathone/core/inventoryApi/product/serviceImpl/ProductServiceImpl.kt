@@ -1,5 +1,10 @@
 package ru.hackathone.core.inventoryApi.product.serviceImpl
 
+import io.ktor.client.call.body
+import io.ktor.http.HttpStatusCode
+import ru.hackathone.core.inventoryApi.exceptions.BadRequestException
+import ru.hackathone.core.inventoryApi.exceptions.NoContentException
+import ru.hackathone.core.inventoryApi.exceptions.UnknownStatusCodeException
 import ru.hackathone.core.inventoryApi.product.client.ProductClient
 import ru.hackathone.core.inventoryApi.product.dto.ProductRequest
 import ru.hackathone.core.inventoryApi.product.models.Product
@@ -8,19 +13,28 @@ import ru.hackathone.core.inventoryApi.product.service.ProductService
 
 class ProductServiceImpl(private val client: ProductClient) : ProductService {
     override suspend fun createProduct(product: ProductRequest): Int {
-        TODO("Not yet implemented")
+        return client.createProduct(product).body<Int>()
     }
 
     override suspend fun updateProduct(productId: Int, product: ProductRequest) {
-        TODO("Not yet implemented")
+        client.updateProduct(productId, product)
     }
 
     override suspend fun deleteProduct(productId: Int) {
-        TODO("Not yet implemented")
+        client.deleteProduct(productId)
     }
 
     override suspend fun getProductList(): Array<Product> {
-        TODO("Not yet implemented")
+        val response = client.getProductList()
+        when (response.status) {
+            HttpStatusCode.OK -> {
+                return response.body<Array<Product>>()
+            }
+
+            HttpStatusCode.BadRequest -> throw BadRequestException()
+            HttpStatusCode.NoContent -> throw NoContentException()
+            else -> throw UnknownStatusCodeException()
+        }
     }
 
 
