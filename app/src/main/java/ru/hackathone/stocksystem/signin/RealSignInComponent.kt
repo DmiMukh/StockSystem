@@ -10,7 +10,9 @@ import ru.hackathone.core.inventoryApi.userAuth.service.AuthorizationService
 import ru.hackathone.core.message.data.MessageService
 import ru.hackathone.core.message.domain.Message
 import ru.hackathone.core.storage.SettingsStorage
-import ru.hackathone.core.utils.TOKEN
+import ru.hackathone.core.utils.ROLE_PATH
+import ru.hackathone.core.utils.TOKEN_PATH
+import ru.hackathone.core.utils.USER_PATH
 import ru.hackathone.core.utils.componentCoroutineScope
 import ru.hackathone.stocksystem.signin.toolbar.RealSignInToolbarComponent
 
@@ -53,8 +55,11 @@ class RealSignInComponent(
         coroutineScope.launch {
             inProgress.value = true
             try {
-                val token = service.signIn(login.value, password.value)
-                storage.putString(TOKEN, token)
+                service.signIn(login.value, password.value).apply {
+                    storage.putString(TOKEN_PATH, this.token)
+                    storage.putInt(ROLE_PATH, this.roleId)
+                    storage.putInt(USER_PATH, this.userId)
+                }
             } catch (e: BadRequestException) {
                 messageService.showMessage(Message("Bad Request"))
                 return@launch

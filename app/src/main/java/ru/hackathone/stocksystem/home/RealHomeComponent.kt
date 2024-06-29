@@ -2,9 +2,8 @@ package ru.hackathone.stocksystem.home
 
 import com.arkivanov.decompose.ComponentContext
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import ru.hackathone.core.storage.SettingsStorage
-import ru.hackathone.core.utils.ROLE
+import ru.hackathone.core.utils.ROLE_PATH
 import ru.hackathone.stocksystem.home.toolbar.RealHomeToolbarComponent
 
 class RealHomeComponent(
@@ -27,6 +26,6 @@ class RealHomeComponent(
     override fun onStaffClick()  = this.onStaff.invoke()
 
     init {
-        roleId.value = storage.getInt(ROLE)
+        roleId.value = storage.getInt(ROLE_PATH)
     }
 }
