@@ -16,7 +16,7 @@ import ru.hackathone.core.theme.AppTheme
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun ProductItem(
+fun ProductListItem(
     model: Product,
     onClick: (Product) -> Unit
 ){
@@ -31,15 +31,15 @@ fun ProductItem(
     ) {
         Column {
             Text(text = model.name)
-            Text(text = model.description)
+            //Text(text = model.description)
         }
     }
 }
 
 @Composable
-fun ProductItemPreview(darkTheme: Boolean){
+fun ProductListItemPreview(darkTheme: Boolean){
     AppTheme(darkTheme = darkTheme) {
-        ProductItem(
+        ProductListItem(
             model = Product(),
             onClick = {}
         )
@@ -48,12 +48,12 @@ fun ProductItemPreview(darkTheme: Boolean){
 
 @Preview(name = "light")
 @Composable
-fun ProductItemPreviewLight() {
-    ProductItemPreview(darkTheme = false)
+fun ProductListItemPreviewLight() {
+    ProductListItemPreview(darkTheme = false)
 }
 
 @Preview(name = "dark")
 @Composable
-fun ProductItemPreviewDark() {
-    ProductItemPreview(darkTheme = true)
+fun ProductListItemPreviewDark() {
+    ProductListItemPreview(darkTheme = true)
 }
