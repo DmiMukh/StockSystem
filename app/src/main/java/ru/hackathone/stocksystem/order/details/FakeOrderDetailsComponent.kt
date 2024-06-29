@@ -7,4 +7,7 @@ class FakeOrderDetailsComponent: OrderDetailsComponent {
     override val toolbarComponent = FakeOrderDetailsToolbarComponent()
     override val description = MutableStateFlow("")
     override val title = MutableStateFlow("")
+    override fun onTitleChange(newValue: String) = Unit
+
+    override fun onDescriptionChange(newValue: String) = Unit
 }

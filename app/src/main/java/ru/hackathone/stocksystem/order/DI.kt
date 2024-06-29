@@ -30,16 +30,21 @@ fun ComponentFactory.createOrderDetailsComponent(
     return RealOrderDetailsComponent(
         componentContext = componentContext,
         task = task,
-        onBack = onBack
+        onBack = onBack,
+        service = get(),
+        messageService = get()
     )
 }
 fun ComponentFactory.createOrderListComponent(
     componentContext: ComponentContext,
-    onBack: () -> Unit
+    onBack: () -> Unit,
+    onDetails: (Task) -> Unit
 ) : OrderListComponent {
     return RealOrderListComponent(
         componentContext = componentContext,
         onBack = onBack,
-        service = get()
+        onDetails = onDetails,
+        service = get(),
+        messageService = get()
     )
 }

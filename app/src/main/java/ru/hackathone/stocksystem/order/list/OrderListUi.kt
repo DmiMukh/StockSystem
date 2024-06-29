@@ -7,8 +7,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AddCircle
 import androidx.compose.material.icons.filled.Info
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -19,6 +22,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import ru.hackathone.core.theme.AppTheme
+import ru.hackathone.core.utils.ICON_SIZE
 import ru.hackathone.stocksystem.order.list.item.OrderItem
 import ru.hackathone.stocksystem.order.list.toolbar.OrderListToolbarUi
 
@@ -28,7 +32,16 @@ fun OrderListUi(component: OrderListComponent) {
     val viewState = component.viewState.collectAsState()
 
     Scaffold(
-        topBar = { OrderListToolbarUi(component.toolbarComponent) }
+        topBar = { OrderListToolbarUi(component.toolbarComponent) },
+        floatingActionButton = {
+            IconButton(onClick = component::onAddOrderClick) {
+                Icon(
+                    imageVector = Icons.Default.AddCircle,
+                    contentDescription = "add_order",
+                    modifier = Modifier.size(ICON_SIZE)
+                )
+            }
+        }
     ) { paddingValues ->
         Box(modifier = Modifier
             .padding(paddingValues)
@@ -48,8 +61,14 @@ fun OrderListUi(component: OrderListComponent) {
                         }
                     }
                 }
-                OrderListState.Loading -> TODO()
-                OrderListState.NoItems -> OrderListNoItems(modifier = Modifier.padding(16.dp).align(Alignment.Center))
+                OrderListState.Loading -> CircularProgressIndicator(
+                    modifier = Modifier.align(Alignment.Center)
+                )
+                OrderListState.NoItems -> OrderListNoItems(modifier = Modifier
+                    .padding(16.dp)
+                    .align(Alignment.Center)
+                )
+                OrderListState.Idle -> {}
             }
         }
         Column(
@@ -74,7 +93,7 @@ fun OrderListNoItems(modifier: Modifier = Modifier){
 
         Text(
             modifier = Modifier.padding(top = 16.dp, bottom = 24.dp),
-            text = "Нет данных",
+            text = "No Data",
             textAlign = TextAlign.Center
         )
     }

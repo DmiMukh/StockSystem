@@ -4,6 +4,7 @@ import ru.hackathone.core.inventoryApi.staff.models.Task
 
 sealed class OrderListState {
     data class Display(val items: List<Task>) : OrderListState()
+    object Idle: OrderListState()
     object Loading: OrderListState()
     object NoItems: OrderListState()
 }

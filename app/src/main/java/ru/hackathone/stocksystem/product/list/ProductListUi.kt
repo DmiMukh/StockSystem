@@ -28,7 +28,7 @@ fun ProductListUi(component: ProductListComponent){
             IconButton(onClick = component::onAddProductClick) {
                 Icon(
                     imageVector = Icons.Default.AddCircle,
-                    contentDescription = "arrow_back",
+                    contentDescription = "add_product",
                     modifier = Modifier.size(ICON_SIZE)
                 )
             }

@@ -5,6 +5,7 @@ import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.router.stack.pop
+import com.arkivanov.decompose.router.stack.push
 import com.arkivanov.essenty.parcelable.Parcelable
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.parcelize.Parcelize
@@ -42,7 +43,8 @@ class RealOrderRootComponent(
         is ChildConfig.List -> OrderRootComponent.Child.List(
             component = this.componentFactory.createOrderListComponent(
                 componentContext = componentContext,
-                onBack = { onBack.invoke() }
+                onBack = { onBack.invoke() },
+                onDetails = { task -> navigation.push(ChildConfig.Details(task)) }
             )
         )
     }

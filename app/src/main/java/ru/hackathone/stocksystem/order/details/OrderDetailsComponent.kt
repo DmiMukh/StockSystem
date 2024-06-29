@@ -9,4 +9,7 @@ interface OrderDetailsComponent {
 
     val description: StateFlow<String>
     val title: StateFlow<String>
+
+    fun onTitleChange(newValue: String)
+    fun onDescriptionChange(newValue: String)
 }
