@@ -49,6 +49,22 @@ class RealOrderListComponent(
         this.onDetails.invoke(task)
     }
 
+    override fun onRemoveOrder(task: Task) {
+        messageService.showMessage(
+            Message(
+                text = "Remove task ${task.title}",
+                actionTitle = "Accept",
+                action = {
+                    componentScope.launch {
+                        service.deleteTask(task.id, task.statusId)
+                        messageService.showMessage(Message("Task ${task.title} removed!"))
+                        refreshOrders()
+                    }
+                }
+            )
+        )
+    }
+
     private class OrderListKeeper :  InstanceKeeper.Instance {
         val viewState = MutableStateFlow<OrderListState>(OrderListState.Idle)
 

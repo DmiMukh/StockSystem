@@ -13,5 +13,6 @@ interface OrderListComponent {
 
     fun onAddOrderClick()
     fun onOrderClick(task: Task)
+    fun onRemoveOrder(task: Task)
 
 }

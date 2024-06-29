@@ -16,14 +16,16 @@ import ru.hackathone.core.inventoryApi.staff.models.Task
 @Composable
 fun OrderItem(
     model: Task,
-    onClick: (Task) -> Unit
+    onClick: (Task) -> Unit,
+    onLongClick: (Task) -> Unit
 ) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .padding(4.dp)
             .combinedClickable(
-                onClick = { onClick(model) }
+                onClick = { onClick(model) },
+                onLongClick = { onLongClick(model) }
             ),
     ) {
         Column {

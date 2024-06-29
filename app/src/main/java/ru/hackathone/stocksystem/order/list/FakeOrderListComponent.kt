@@ -12,4 +12,5 @@ class FakeOrderListComponent: OrderListComponent {
 
     override fun onAddOrderClick() = Unit
     override fun onOrderClick(task: Task) = Unit
+    override fun onRemoveOrder(task: Task) = Unit
 }

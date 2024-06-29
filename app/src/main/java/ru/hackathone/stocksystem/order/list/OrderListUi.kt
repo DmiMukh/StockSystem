@@ -60,7 +60,8 @@ fun OrderListUi(component: OrderListComponent) {
                             item {
                                 OrderItem(
                                     model = model,
-                                    onClick = { (component::onOrderClick)(it) }
+                                    onClick = { (component::onOrderClick)(it) },
+                                    onLongClick = { (component::onRemoveOrder)(it) }
                                 )
                             }
                         }
