@@ -17,7 +17,7 @@ import ru.hackathone.core.utils.ICON_SIZE
 @Composable
 fun StaffListToolbarUi(component: StaffListToolbarComponent) {
     TopAppBar(
-        title = { Text(text = "Order List") },
+        title = { Text(text = "Staff List") },
         navigationIcon = {
             IconButton(onClick = component::onBackClick) {
                 Icon(
