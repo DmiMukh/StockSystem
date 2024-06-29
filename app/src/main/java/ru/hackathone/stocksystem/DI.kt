@@ -27,7 +27,8 @@ fun ComponentFactory.createHomeComponent(
         componentContext = componentContext,
         onOrder = onOrder,
         onProduct = onProduct,
-        onStaff = onStaff
+        onStaff = onStaff,
+        storage = get()
     )
 }
 
@@ -50,7 +51,10 @@ fun ComponentFactory.createSignInComponent(
     return RealSignInComponent(
         componentContext = componentContext,
         onSettings = onSettings,
-        onSignInComplete = onSignInComplete
+        onSignInComplete = onSignInComplete,
+        service = get(),
+        messageService = get(),
+        storage = get()
     )
 }
 

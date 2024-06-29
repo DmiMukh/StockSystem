@@ -32,7 +32,8 @@ fun ComponentFactory.createOrderDetailsComponent(
         task = task,
         onBack = onBack,
         service = get(),
-        messageService = get()
+        messageService = get(),
+        storage = get()
     )
 }
 fun ComponentFactory.createOrderListComponent(
@@ -45,6 +46,7 @@ fun ComponentFactory.createOrderListComponent(
         onBack = onBack,
         onDetails = onDetails,
         service = get(),
-        messageService = get()
+        messageService = get(),
+        storage = get()
     )
 }

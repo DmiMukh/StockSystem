@@ -1,18 +1,28 @@
 package ru.hackathone.stocksystem.signin
 
+import android.content.res.Resources.NotFoundException
 import com.arkivanov.decompose.ComponentContext
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import ru.hackathone.core.inventoryApi.exceptions.BadRequestException
+import ru.hackathone.core.inventoryApi.exceptions.UnknownStatusCodeException
+import ru.hackathone.core.inventoryApi.userAuth.service.AuthorizationService
+import ru.hackathone.core.message.data.MessageService
+import ru.hackathone.core.message.domain.Message
+import ru.hackathone.core.storage.SettingsStorage
+import ru.hackathone.core.utils.ROLE_PATH
+import ru.hackathone.core.utils.TOKEN_PATH
+import ru.hackathone.core.utils.USER_PATH
 import ru.hackathone.core.utils.componentCoroutineScope
 import ru.hackathone.stocksystem.signin.toolbar.RealSignInToolbarComponent
-import ru.hackathone.stocksystem.signin.toolbar.SignInToolbarComponent
 
 class RealSignInComponent(
     componentContext: ComponentContext,
     private val onSettings: () -> Unit,
-    private val onSignInComplete: () -> Unit
+    private val onSignInComplete: () -> Unit,
+    private val service: AuthorizationService,
+    private val messageService: MessageService,
+    private val storage: SettingsStorage
 ) : ComponentContext by componentContext, SignInComponent {
     override val toolbarComponent = RealSignInToolbarComponent(
         componentContext = componentContext,
@@ -44,11 +54,31 @@ class RealSignInComponent(
     override fun onSignInClick() {
         coroutineScope.launch {
             inProgress.value = true
-            delay(3000)
-            //TODO("Авторизация через репозиторий")
-            inProgress.value = false
+            try {
+                service.signIn(login.value, password.value).apply {
+                    storage.putString(TOKEN_PATH, this.token)
+                    storage.putInt(ROLE_PATH, this.roleId)
+                    storage.putInt(USER_PATH, this.userId)
+                }
+            } catch (e: BadRequestException) {
+                messageService.showMessage(Message("Bad Request"))
+                return@launch
+            } catch (e: NotFoundException) {
+                messageService.showMessage(Message("Not Found"))
+                return@launch
+            } catch (e: UnknownStatusCodeException) {
+                messageService.showMessage(Message("Unknown Status Code"))
+                return@launch
+            } catch (e: Exception) {
+                messageService.showMessage(Message(e.message.orEmpty()))
+                return@launch
+            }
+            finally {
+                inProgress.value = false
+            }
 
             onSignInComplete.invoke()
+            return@launch
         }
     }
 }

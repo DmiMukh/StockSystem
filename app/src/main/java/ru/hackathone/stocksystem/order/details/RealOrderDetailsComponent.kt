@@ -11,6 +11,8 @@ import ru.hackathone.core.inventoryApi.staff.models.Task
 import ru.hackathone.core.inventoryApi.staff.service.StaffService
 import ru.hackathone.core.message.data.MessageService
 import ru.hackathone.core.message.domain.Message
+import ru.hackathone.core.storage.SettingsStorage
+import ru.hackathone.core.utils.ROLE_PATH
 import ru.hackathone.core.utils.componentScope
 import ru.hackathone.stocksystem.order.details.toolbar.RealOrderDetailsToolbarComponent
 
@@ -19,10 +21,13 @@ class RealOrderDetailsComponent(
     private val task: Task,
     private val onBack: () -> Unit,
     private val service: StaffService,
-    private val messageService: MessageService
+    private val messageService: MessageService,
+    private val storage: SettingsStorage
 ) : ComponentContext by componentContext, OrderDetailsComponent {
 
     private val componentInstance = instanceKeeper.getOrCreate(RealOrderDetailsComponent::TaskKeeper)
+
+    override val roleId = MutableStateFlow(100)
 
     override val toolbarComponent = RealOrderDetailsToolbarComponent(
         componentContext = componentContext,
@@ -69,6 +74,8 @@ class RealOrderDetailsComponent(
     }
 
     init {
+        roleId.value = this.storage.getInt(ROLE_PATH)
+
         if(!componentInstance.isInit) {
             this.title.value = this.task.title
             this.description.value = this.task.description

@@ -24,7 +24,6 @@ import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logging
 import io.ktor.client.statement.HttpResponse
 import io.ktor.client.plugins.contentnegotiation.*
-import io.ktor.http.HttpStatusCode
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 import ru.hackathone.core.inventoryApi.exceptions.AlreadyReportedException
@@ -34,6 +33,7 @@ import ru.hackathone.core.inventoryApi.staff.client.StaffClient
 import ru.hackathone.core.inventoryApi.staff.client.StaffClientImpl
 import ru.hackathone.core.inventoryApi.staff.service.StaffService
 import ru.hackathone.core.inventoryApi.staff.service.StaffServiceImpl
+import ru.hackathone.core.inventoryApi.userAuth.service.AuthorizationService
 import ru.hackathone.core.inventoryApi.userAuth.service.AuthorizationServiceImpl
 import ru.hackathone.core.storage.SettingsStorage
 import ru.hackathone.core.storage.SettingsStorageImpl
@@ -50,7 +50,7 @@ val coreModule = module {
             addr = "http://".plus(get<SettingsStorage>().getString(AUTH_HOST_PATH))
         )
     }
-    single<AuthorizationServiceImpl> { AuthorizationServiceImpl(client = get<AuthorizationClientImpl>()) }
+    single<AuthorizationService> { AuthorizationServiceImpl(client = get()) }
     single<StaffClient> {
         StaffClientImpl(
             client = provideKtorHttpClient(),

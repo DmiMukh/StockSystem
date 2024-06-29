@@ -23,18 +23,23 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import ru.hackathone.core.theme.AppTheme
 import ru.hackathone.core.utils.ICON_SIZE
+import ru.hackathone.core.utils.StaffRole
 import ru.hackathone.stocksystem.order.list.item.OrderItem
 import ru.hackathone.stocksystem.order.list.toolbar.OrderListToolbarUi
 
 @Composable
 fun OrderListUi(component: OrderListComponent) {
 
+    val roleId = component.roleId.collectAsState()
     val viewState = component.viewState.collectAsState()
 
     Scaffold(
         topBar = { OrderListToolbarUi(component.toolbarComponent) },
         floatingActionButton = {
-            IconButton(onClick = component::onAddOrderClick) {
+            IconButton(
+                onClick = component::onAddOrderClick,
+                enabled = (roleId.value <= StaffRole.MANAGER.roleId)
+            ) {
                 Icon(
                     imageVector = Icons.Default.AddCircle,
                     contentDescription = "add_order",
@@ -55,7 +60,7 @@ fun OrderListUi(component: OrderListComponent) {
                             item {
                                 OrderItem(
                                     model = model,
-                                    onClick = {  }
+                                    onClick = { (component::onOrderClick)(it) }
                                 )
                             }
                         }
@@ -70,11 +75,6 @@ fun OrderListUi(component: OrderListComponent) {
                 )
                 OrderListState.Idle -> {}
             }
-        }
-        Column(
-            modifier = Modifier.padding(paddingValues)
-        ) {
-
         }
     }
 }

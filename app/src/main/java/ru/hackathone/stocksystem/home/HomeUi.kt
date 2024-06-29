@@ -7,15 +7,20 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ru.hackathone.core.theme.AppTheme
+import ru.hackathone.core.utils.StaffRole
 import ru.hackathone.stocksystem.home.toolbar.HomeToolbarUi
 
 @Composable
 fun HomeUi(component: HomeComponent) {
+
+    val roleId = component.roleId.collectAsState()
+
     Scaffold (
         topBar = { HomeToolbarUi(component.toolbarComponent) }
     ) { paddingValues ->
@@ -30,15 +35,19 @@ fun HomeUi(component: HomeComponent) {
                 onClick = component::onOrderClick
             )
 
-            MenuButton(
-                title = "Product",
-                onClick = component::onProductClick
-            )
+            if (roleId.value <= StaffRole.MANAGER.roleId) {
+                MenuButton(
+                    title = "Product",
+                    onClick = component::onProductClick
+                )
+            }
 
-            MenuButton(
-                title = "Staff",
-                onClick = component::onStaffClick
-            )
+            if (roleId.value <= StaffRole.MANAGER.roleId) {
+                MenuButton(
+                    title = "Staff",
+                    onClick = component::onStaffClick
+                )
+            }
         }
     }
 }
@@ -46,13 +55,15 @@ fun HomeUi(component: HomeComponent) {
 @Composable
 fun MenuButton(
     title: String,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    enabled: Boolean = true
 ){
     Button(
         onClick = onClick,
         modifier = Modifier
             .fillMaxWidth()
-            .padding(12.dp)
+            .padding(12.dp),
+        enabled = enabled
     ) {
         Text(
             text = title,

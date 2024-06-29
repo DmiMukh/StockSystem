@@ -5,6 +5,7 @@ import ru.hackathone.stocksystem.order.details.toolbar.FakeOrderDetailsToolbarCo
 
 class FakeOrderDetailsComponent: OrderDetailsComponent {
     override val toolbarComponent = FakeOrderDetailsToolbarComponent()
+    override val roleId = MutableStateFlow(0)
     override val description = MutableStateFlow("")
     override val title = MutableStateFlow("")
     override fun onTitleChange(newValue: String) = Unit
