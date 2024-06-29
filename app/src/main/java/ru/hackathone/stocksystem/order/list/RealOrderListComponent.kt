@@ -50,6 +50,9 @@ class RealOrderListComponent(
     }
 
     override fun onRemoveOrder(task: Task) {
+
+        if (roleId.value > StaffRole.MANAGER.roleId) return
+
         messageService.showMessage(
             Message(
                 text = "Remove task ${task.title}",
