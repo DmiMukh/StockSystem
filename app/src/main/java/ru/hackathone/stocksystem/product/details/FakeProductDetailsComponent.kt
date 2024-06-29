@@ -1,6 +1,7 @@
 package ru.hackathone.stocksystem.product.details
 
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import ru.hackathone.core.inventoryApi.product.models.ProductCategory
 import ru.hackathone.core.inventoryApi.product.models.ProductLocation
 import ru.hackathone.core.inventoryApi.product.models.ProductStatus
@@ -10,9 +11,13 @@ class FakeProductDetailsComponent: ProductDetailsComponent {
     override val toolbarComponent = FakeProductDetailsToolbarComponent()
     override val name = MutableStateFlow("")
     override val description = MutableStateFlow("")
-    override val category = MutableStateFlow(ProductCategory())
-    override val location = MutableStateFlow(ProductLocation())
-    override val status = MutableStateFlow(ProductStatus())
+    override val categoryId = MutableStateFlow(0)
+    override val categoryName = MutableStateFlow("")
+    override val locationId = MutableStateFlow(0)
+    override val locationRow = MutableStateFlow("")
+    override val locationPlace = MutableStateFlow("")
+    override val statusId = MutableStateFlow(0)
+    override val statusName = MutableStateFlow("")
 
     override fun onCategoryChange(newValue: ProductCategory) = Unit
 

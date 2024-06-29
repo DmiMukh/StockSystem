@@ -31,7 +31,9 @@ fun ComponentFactory.createProductListComponent(
     return RealProductListComponent(
         componentContext = componentContext,
         onBack = onBack,
-        onDetails = onDetails
+        onDetails = onDetails,
+        service = get(),
+        messageService = get()
     )
 }
 
@@ -43,6 +45,8 @@ fun ComponentFactory.createProductDetailsComponent(
     return RealProductDetailsComponent(
         componentContext = componentContext,
         product = product,
-        onBack = onBack
+        onBack = onBack,
+        service = get(),
+        messageService = get()
     )
 }

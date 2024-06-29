@@ -20,9 +20,10 @@ fun ProductDetailsUi(component: ProductDetailsComponent){
 
     val name = component.name.collectAsState()
     val description = component.description.collectAsState()
-    val category = component.category.collectAsState()
-    val location = component.location.collectAsState()
-    val status = component.status.collectAsState()
+    val categoryName = component.categoryName.collectAsState()
+    val locationRow = component.locationRow.collectAsState()
+    val locationPlace = component.locationPlace.collectAsState()
+    val statusName = component.statusName.collectAsState()
 
     Scaffold(
         topBar = { ProductDetailsToolbarUi(component.toolbarComponent) }

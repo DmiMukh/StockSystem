@@ -4,16 +4,25 @@ import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.essenty.instancekeeper.InstanceKeeper
 import com.arkivanov.essenty.instancekeeper.getOrCreate
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
+import ru.hackathone.core.inventoryApi.product.dto.ProductRequest
 import ru.hackathone.core.inventoryApi.product.models.Product
 import ru.hackathone.core.inventoryApi.product.models.ProductCategory
 import ru.hackathone.core.inventoryApi.product.models.ProductLocation
 import ru.hackathone.core.inventoryApi.product.models.ProductStatus
+import ru.hackathone.core.inventoryApi.product.service.ProductService
+import ru.hackathone.core.message.data.MessageService
+import ru.hackathone.core.message.domain.Message
+import ru.hackathone.core.utils.componentScope
 import ru.hackathone.stocksystem.product.details.toolbar.RealProductDetailsToolbarComponent
 
 class RealProductDetailsComponent(
     componentContext: ComponentContext,
     private val product: Product,
-    private val onBack: () -> Unit
+    private val onBack: () -> Unit,
+    private val service: ProductService,
+    private val messageService: MessageService
 ) : ComponentContext by componentContext, ProductDetailsComponent {
 
     private val componentInstance = instanceKeeper.getOrCreate(RealProductDetailsComponent::ProductKeeper)
@@ -22,17 +31,57 @@ class RealProductDetailsComponent(
         componentContext = componentContext,
         onBack = { onBack.invoke() },
         onSave = {
+
+            val newProduct = ProductRequest(
+                name = name.value,
+                quantity = 0,
+                description = description.value,
+                category = categoryId.value,
+                location = locationId.value,
+                status = statusId.value
+            )
+
+            /*
+            componentScope.launch {
+                if (product.id == -1) {
+                    val taskId = service.createProduct()
+                    service.assignTask(userId.value, taskId)
+
+                    messageService.showMessage(Message(text = "Task created!"))
+                } else {
+                    if (task.title != title.value
+                        || task.description != description.value
+                        || task.statusId != statusId.value) {
+                        service.updateTask(task.id, newTask)
+                    }
+
+                    if (task.userId != userId.value) {
+                        service.assignTask(userId.value, task.id)
+                    }
+
+                    messageService.showMessage(Message(text = "Task updated!"))
+                }
+
+                onBack.invoke()
+            }
+            */
+
             // TODO("Add Save")
             onBack.invoke()
         }
     )
     override val name get() = componentInstance.name
     override val description get() = componentInstance.description
-    override val category get() = componentInstance.category
-    override val location get() = componentInstance.location
-    override val status get() = componentInstance.status
+    override val categoryId get() = componentInstance.categoryId
+    override val categoryName get() = componentInstance.categoryName
+    override val locationId get() = componentInstance.locationId
+    override val locationRow get() = componentInstance.locationRow
+    override val locationPlace get() = componentInstance.locationPlace
+    override val statusId get() = componentInstance.statusId
+    override val statusName get() = componentInstance.statusName
     override fun onCategoryChange(newValue: ProductCategory) {
-        TODO("Not yet implemented")
+        categoryId.value = newValue.id
+        categoryName.value = newValue.name
     }
 
     override fun onDescriptionChange(newValue: String) {
@@ -40,7 +89,9 @@ class RealProductDetailsComponent(
     }
 
     override fun onLocationChange(newValue: ProductLocation) {
-        TODO("Not yet implemented")
+        locationId.value = newValue.id
+        locationRow.value = newValue.row
+        locationPlace.value = newValue.place
     }
 
     override fun onNameChange(newValue: String) {
@@ -48,7 +99,8 @@ class RealProductDetailsComponent(
     }
 
     override fun onStatusChange(newValue: ProductStatus) {
-        TODO("Not yet implemented")
+        statusId.value = newValue.id
+        statusName.value = newValue.name
     }
 
     private class ProductKeeper :  InstanceKeeper.Instance {
@@ -57,9 +109,13 @@ class RealProductDetailsComponent(
 
         val name = MutableStateFlow("")
         val description = MutableStateFlow("")
-        val category = MutableStateFlow(ProductCategory())
-        val location = MutableStateFlow(ProductLocation())
-        val status = MutableStateFlow(ProductStatus())
+        val categoryId = MutableStateFlow(0)
+        val categoryName = MutableStateFlow("")
+        val locationId = MutableStateFlow(0)
+        val locationRow = MutableStateFlow("")
+        val locationPlace = MutableStateFlow("")
+        val statusId = MutableStateFlow(0)
+        val statusName = MutableStateFlow("")
 
         override fun onDestroy() = Unit
     }
@@ -68,9 +124,13 @@ class RealProductDetailsComponent(
         if(!componentInstance.isInit) {
             this.name.value = this.product.name
             this.description.value = this.product.description
-            this.category.value = this.product.category
-            this.location.value = this.product.location
-            this.status.value = this.product.status
+            this.categoryId.value = this.product.category.id
+            this.categoryName.value = this.product.category.name
+            this.locationId.value = this.product.location.id
+            this.locationRow.value = this.product.location.row
+            this.locationPlace.value = this.product.location.place
+            this.statusId.value = this.product.status.id
+            this.statusName.value = this.product.status.name
         }
     }
 }

@@ -11,9 +11,17 @@ interface ProductDetailsComponent {
     val toolbarComponent: ProductDetailsToolbarComponent
     val name: StateFlow<String>
     val description: StateFlow<String>
-    val category: StateFlow<ProductCategory>
-    val location: StateFlow<ProductLocation>
-    val status: StateFlow<ProductStatus>
+
+    val categoryId: StateFlow<Int>
+    val categoryName: StateFlow<String>
+
+    val locationId: StateFlow<Int>
+    val locationRow: StateFlow<String>
+    val locationPlace: StateFlow<String>
+
+    val statusId: StateFlow<Int>
+    val statusName: StateFlow<String>
+
     fun onCategoryChange(newValue: ProductCategory)
     fun onDescriptionChange(newValue: String)
     fun onLocationChange(newValue: ProductLocation)
