@@ -21,13 +21,15 @@ fun ComponentFactory.createHomeComponent(
     componentContext: ComponentContext,
     onOrder: () -> Unit,
     onProduct: () -> Unit,
-    onStaff: () -> Unit
+    onStaff: () -> Unit,
+    onLogOut: () -> Unit
 ): HomeComponent {
     return RealHomeComponent(
         componentContext = componentContext,
         onOrder = onOrder,
         onProduct = onProduct,
         onStaff = onStaff,
+        onLogOut = onLogOut,
         storage = get()
     )
 }

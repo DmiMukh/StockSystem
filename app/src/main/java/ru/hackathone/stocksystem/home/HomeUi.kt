@@ -31,7 +31,7 @@ fun HomeUi(component: HomeComponent) {
         ) {
 
             MenuButton(
-                title = "Order",
+                title = "Task",
                 onClick = component::onOrderClick
             )
 
@@ -42,11 +42,14 @@ fun HomeUi(component: HomeComponent) {
                 )
             }
 
-            if (roleId.value <= StaffRole.MANAGER.roleId) {
-                MenuButton(
-                    title = "Staff",
-                    onClick = component::onStaffClick
-                )
+            // Not Implemented
+            if (false) {
+                if (roleId.value <= StaffRole.MANAGER.roleId) {
+                    MenuButton(
+                        title = "Staff",
+                        onClick = component::onStaffClick
+                    )
+                }
             }
         }
     }
