@@ -78,4 +78,53 @@ core/src/test/java/ru/hackathone/core/inventoryapi
 - KotlinX
 - Ktor
 
+# Скриншоты работы приложения
+### 1. Меню авторизации
+![изображение](https://github.com/DmiMukh/StockSystem/assets/124619126/c08ca92c-dfee-41cb-b312-5dd3179c79e5)
+
+### Авторизация работает полностью, если в базе нет данных, то приложение дальше не пускает
+![изображение](https://github.com/DmiMukh/StockSystem/assets/124619126/3326de6e-9534-4ab1-a17d-18204d5abe69)
+
+
+### 2. Настройка хостов сервисов (шестерня на экране авторизации)
+![изображение](https://github.com/DmiMukh/StockSystem/assets/124619126/add47b8e-5d32-45ca-ae82-40be133fd411)
+
+### главный экран от лица админа/менеджера 
+![изображение](https://github.com/DmiMukh/StockSystem/assets/124619126/e42a17a1-531b-47d3-aa24-1190bb9c3033)
+
+### Задач нет
+![изображение](https://github.com/DmiMukh/StockSystem/assets/124619126/01bf68d3-926b-484d-ba1c-c313da887ecc)
+
+### Создание задачи
+![изображение](https://github.com/DmiMukh/StockSystem/assets/124619126/27664abf-5e8c-4714-a9a1-545f5551ba4c)
+
+### Проверим список задач
+![изображение](https://github.com/DmiMukh/StockSystem/assets/124619126/08d80ece-8a1c-4dbd-b18a-1a902c7c8649)
+
+### Если зажать, ее можно удалить
+![изображение](https://github.com/DmiMukh/StockSystem/assets/124619126/f20dd296-2e48-4b3d-a171-3fc3a36b7e69)
+
+### Если просто нажать, то редактировать 
+![изображение](https://github.com/DmiMukh/StockSystem/assets/124619126/e937f201-7317-44b3-96fb-42e9f56f78f5)
+
+### Staff отображает работников в системе (у самих работников данный функционал отсутствует)
+![изображение](https://github.com/DmiMukh/StockSystem/assets/124619126/93118f80-f1f1-442a-b6f1-f95085260d98)
+
+### Создадим новый аккаунт
+![изображение](https://github.com/DmiMukh/StockSystem/assets/124619126/5e20d4d4-bbd1-4b06-a7fc-66141ba1ec47)
+
+![изображение](https://github.com/DmiMukh/StockSystem/assets/124619126/923168eb-2577-46a3-9fe8-6baec419701a)
+
+### Список продуктов 
+![изображение](https://github.com/DmiMukh/StockSystem/assets/124619126/2dd9fdd5-8458-431a-a736-19f93baadd82)
+
+### Если нажать по продукту, можно получить дополнительную информацию и изменить ее
+![изображение](https://github.com/DmiMukh/StockSystem/assets/124619126/5a2f0c40-4b6d-4e4b-a4d0-00fec4122068)
+
+
+### Интерфейс работника
+![изображение](https://github.com/DmiMukh/StockSystem/assets/124619126/ba65b4bf-98e0-48c8-bf54-7aab29ecd05e)
+
+
+
 ## Более подробное объяснение архитектуры дано в ютуб видео (настоятельно ознакомьтесь) : https://www.youtube.com/watch?v=dQw4w9WgXcQ
