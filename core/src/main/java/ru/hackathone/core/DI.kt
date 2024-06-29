@@ -27,6 +27,7 @@ import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.http.HttpStatusCode
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
+import ru.hackathone.core.inventoryApi.exceptions.AlreadyReportedException
 import ru.hackathone.core.inventoryApi.exceptions.BadRequestException
 import ru.hackathone.core.inventoryApi.exceptions.NoContentException
 import ru.hackathone.core.inventoryApi.staff.client.StaffClient
@@ -98,6 +99,7 @@ fun provideKtorHttpClient(): HttpClient {
                     404 -> throw NotFoundException()
                     400 -> throw BadRequestException()
                     204 -> throw NoContentException()
+                    208 -> throw AlreadyReportedException()
                     in 300..399 -> throw RedirectResponseException(response, response.toString())
                     in 400..499 -> throw ClientRequestException(response, response.toString())
                     in 500..599 -> throw ServerResponseException(response, response.toString())

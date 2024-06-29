@@ -36,11 +36,7 @@ class AuthorizationServiceImpl(private var client: AuthorizationClient) : Author
                 val signUpResponse = response.body<SignUpResponse>()
                 return signUpResponse.id
             }
-
-            HttpStatusCode.BadRequest -> throw BadRequestException()
-            HttpStatusCode.NotFound -> throw NotFoundException()
-            HttpStatusCode.fromValue(208) -> throw AlreadyReportedException()
-            else -> throw UnknownStatusCodeException()
+             else -> throw UnknownStatusCodeException()
         }
     }
 
@@ -48,19 +44,16 @@ class AuthorizationServiceImpl(private var client: AuthorizationClient) : Author
     Sign-In with the provided login and password.
     @login : String
     @password : String
-    @return token : String
+    @return [userId, user_role, token] : SignInResponse
     Can trow:
      */
-    override suspend fun signIn(login: String, password: String): String {
+    override suspend fun signIn(login: String, password: String): SignInResponse {
         val response = client.signIn(login, password)
         when (response.status) {
             HttpStatusCode.OK -> {
-                val signInResponse = response.body<SignInResponse>()
-                return signInResponse.token
+                return response.body<SignInResponse>()
             }
 
-            HttpStatusCode.BadRequest -> throw BadRequestException()
-            HttpStatusCode.NotFound -> throw NotFoundException()
             else -> throw UnknownStatusCodeException()
         }
     }
