@@ -49,7 +49,8 @@ class RealRootComponent(
                 componentContext = componentContext,
                 onOrder = { navigation.push(ChildConfig.OrderRoot) },
                 onProduct = { navigation.push(ChildConfig.ProductRoot) },
-                onStaff = {}
+                onStaff = {},
+                onLogOut = { navigation.replaceCurrent(ChildConfig.SignIn) }
             )
         )
 

@@ -11,11 +11,13 @@ class RealHomeComponent(
     private val onOrder: () -> Unit,
     private val onProduct: () -> Unit,
     private val onStaff: () -> Unit,
+    private val onLogOut: () -> Unit,
     private val storage: SettingsStorage
 ) : ComponentContext by componentContext, HomeComponent {
 
     override val toolbarComponent = RealHomeToolbarComponent(
-        componentContext = componentContext
+        componentContext = componentContext,
+        onLogOut = { this.onLogOut.invoke() }
     )
     override val roleId = MutableStateFlow(100)
 
@@ -26,6 +28,6 @@ class RealHomeComponent(
     override fun onStaffClick()  = this.onStaff.invoke()
 
     init {
-        roleId.value = storage.getInt(ROLE_PATH)
+        roleId.value = this.storage.getInt(ROLE_PATH)
     }
 }
