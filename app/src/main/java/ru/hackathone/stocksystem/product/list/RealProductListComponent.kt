@@ -39,12 +39,11 @@ class RealProductListComponent(
     override val viewState get() = componentInstance.viewState
 
     override fun onAddProductClick() {
-        messageService.showMessage(Message("Not Implemented Yet"))
-        //onDetails.invoke(Product(id = -1, name = "New Product"))
+        onDetails.invoke(Product(id = -1, name = "New Product"))
     }
 
     override fun onProductClick(product: Product) {
-        messageService.showMessage(Message("Not Implemented Yet"))
+        onDetails.invoke(product)
     }
 
     private class ProductListKeeper :  InstanceKeeper.Instance {
