@@ -11,7 +11,9 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import ru.hackathone.core.utils.ICON_SIZE
+import ru.hackathone.stocksystem.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -30,7 +32,7 @@ fun SignUpToolbarUi(component: SignUpToolbarComponent) {
         actions = {
             IconButton(onClick = component::onSaveClick) {
                 Icon(
-                    imageVector = Icons.Default.Refresh,
+                    painter = painterResource(R.drawable.ic_save),
                     contentDescription = "save",
                     modifier = Modifier.size(ICON_SIZE)
                 )
