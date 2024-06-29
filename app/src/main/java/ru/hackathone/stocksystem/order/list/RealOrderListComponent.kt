@@ -17,6 +17,8 @@ import ru.hackathone.core.message.data.MessageService
 import ru.hackathone.core.message.domain.Message
 import ru.hackathone.core.storage.SettingsStorage
 import ru.hackathone.core.utils.ROLE_PATH
+import ru.hackathone.core.utils.StaffRole
+import ru.hackathone.core.utils.USER_PATH
 import ru.hackathone.core.utils.componentScope
 import ru.hackathone.stocksystem.order.list.toolbar.RealOrderListToolbarComponent
 
@@ -59,7 +61,9 @@ class RealOrderListComponent(
 
         componentScope.launch {
             try {
-                val tasks = service.getTaskList()
+
+                val tasks = if (roleId.value <= StaffRole.MANAGER.roleId) service.getTaskList()
+                else service.getWorkerTasksById(storage.getInt(USER_PATH))
 
                 if (tasks.size == 0) {
                     viewState.update { OrderListState.NoItems }
