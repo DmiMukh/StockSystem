@@ -31,7 +31,7 @@ fun HomeUi(component: HomeComponent) {
         ) {
 
             MenuButton(
-                title = "Order",
+                title = "Task",
                 onClick = component::onOrderClick
             )
 

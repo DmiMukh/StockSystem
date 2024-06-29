@@ -45,10 +45,21 @@ class RealOrderDetailsComponent(
 
             componentScope.launch {
                 if (task.id == -1) {
-                    service.createTask(newTask)
+                    val taskId = service.createTask(newTask)
+                    service.assignTask(userId.value, taskId)
+
                     messageService.showMessage(Message(text = "Task created!"))
                 } else {
-                    service.updateTask(task.id, newTask)
+                    if (task.title != title.value
+                        || task.description != description.value
+                        || task.statusId != statusId.value) {
+                        service.updateTask(task.id, newTask)
+                    }
+
+                    if (task.userId != userId.value) {
+                        service.assignTask(userId.value, task.id)
+                    }
+
                     messageService.showMessage(Message(text = "Task updated!"))
                 }
 
