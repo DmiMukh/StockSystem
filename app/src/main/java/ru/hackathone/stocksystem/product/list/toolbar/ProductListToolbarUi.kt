@@ -3,6 +3,7 @@ package ru.hackathone.stocksystem.product.list.toolbar
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -31,15 +32,13 @@ fun ProductListToolbarUi(component: ProductListToolbarComponent){
             }
         },
         actions = {
-            /*
-            IconButton(onClick = component::onSaveClick) {
+            IconButton(onClick = component::onRefreshClick) {
                 Icon(
-                    painter = painterResource(R.drawable.ic_save),
-                    contentDescription = "save",
+                    imageVector = Icons.Default.Refresh,
+                    contentDescription = "refresh",
                     modifier = Modifier.size(ICON_SIZE)
                 )
             }
-            */
         }
     )
 }
