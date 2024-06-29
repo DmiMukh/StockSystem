@@ -34,7 +34,9 @@ fun OrderListUi(component: OrderListComponent) {
     Scaffold(
         topBar = { OrderListToolbarUi(component.toolbarComponent) },
         floatingActionButton = {
-            IconButton(onClick = component::onAddOrderClick) {
+            IconButton(
+                onClick = component::onAddOrderClick
+            ) {
                 Icon(
                     imageVector = Icons.Default.AddCircle,
                     contentDescription = "add_order",
