@@ -66,6 +66,10 @@ class RealProductDetailsComponent(
     override val locationPlace get() = componentInstance.locationPlace
     override val statusId get() = componentInstance.statusId
     override val statusName get() = componentInstance.statusName
+    override val categories get() = componentInstance.categories
+    override val locations get() = componentInstance.locations
+    override val statuses get() = componentInstance.statuses
+
     override fun onCategoryChange(newValue: ProductCategory) {
         categoryId.value = newValue.id
         categoryName.value = newValue.name
@@ -104,6 +108,10 @@ class RealProductDetailsComponent(
         val statusId = MutableStateFlow(0)
         val statusName = MutableStateFlow("")
 
+        val categories = MutableStateFlow<List<ProductCategory>>(emptyList())
+        val locations = MutableStateFlow<List<ProductLocation>>(emptyList())
+        val statuses = MutableStateFlow<List<ProductStatus>>(emptyList())
+
         override fun onDestroy() = Unit
     }
 
@@ -118,6 +126,29 @@ class RealProductDetailsComponent(
             this.locationPlace.value = this.product.location.place
             this.statusId.value = this.product.status.id
             this.statusName.value = this.product.status.name
+
+            /*
+            componentScope.launch {
+                statuses.value = service.get
+                statuses.value.forEach {
+                    if (it.id == statusId.value) statusName.value = it.name
+                }
+            }
+
+            componentScope.launch {
+                users.value = service.getStaffList().toList()
+                users.value.forEach {
+                    if (it.id == userId.value) userName.value = it.fullName
+                }
+            }
+
+            componentScope.launch {
+                users.value = service.getStaffList().toList()
+                users.value.forEach {
+                    if (it.id == userId.value) userName.value = it.fullName
+                }
+            }
+            */
         }
     }
 }

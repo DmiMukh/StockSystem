@@ -1,5 +1,6 @@
 package ru.hackathone.stocksystem.product.details
 
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import ru.hackathone.core.inventoryApi.product.models.ProductCategory
 import ru.hackathone.core.inventoryApi.product.models.ProductLocation
@@ -21,6 +22,10 @@ interface ProductDetailsComponent {
 
     val statusId: StateFlow<Int>
     val statusName: StateFlow<String>
+
+    val categories: StateFlow<List<ProductCategory>>
+    val locations: StateFlow<List<ProductLocation>>
+    val statuses: StateFlow<List<ProductStatus>>
 
     fun onCategoryChange(newValue: ProductCategory)
     fun onDescriptionChange(newValue: String)

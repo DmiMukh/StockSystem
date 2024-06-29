@@ -18,7 +18,9 @@ class FakeProductDetailsComponent: ProductDetailsComponent {
     override val locationPlace = MutableStateFlow("")
     override val statusId = MutableStateFlow(0)
     override val statusName = MutableStateFlow("")
-
+    override val categories = MutableStateFlow<List<ProductCategory>>(emptyList())
+    override val locations = MutableStateFlow<List<ProductLocation>>(emptyList())
+    override val statuses = MutableStateFlow<List<ProductStatus>>(emptyList())
     override fun onCategoryChange(newValue: ProductCategory) = Unit
 
     override fun onDescriptionChange(newValue: String) = Unit

@@ -29,6 +29,10 @@ import kotlinx.serialization.json.Json
 import ru.hackathone.core.inventoryApi.exceptions.AlreadyReportedException
 import ru.hackathone.core.inventoryApi.exceptions.BadRequestException
 import ru.hackathone.core.inventoryApi.exceptions.NoContentException
+import ru.hackathone.core.inventoryApi.product.client.ProductClient
+import ru.hackathone.core.inventoryApi.product.client.ProductClientImpl
+import ru.hackathone.core.inventoryApi.product.service.ProductService
+import ru.hackathone.core.inventoryApi.product.serviceImpl.ProductServiceImpl
 import ru.hackathone.core.inventoryApi.staff.client.StaffClient
 import ru.hackathone.core.inventoryApi.staff.client.StaffClientImpl
 import ru.hackathone.core.inventoryApi.staff.service.StaffService
@@ -38,6 +42,7 @@ import ru.hackathone.core.inventoryApi.userAuth.service.AuthorizationServiceImpl
 import ru.hackathone.core.storage.SettingsStorage
 import ru.hackathone.core.storage.SettingsStorageImpl
 import ru.hackathone.core.utils.AUTH_HOST_PATH
+import ru.hackathone.core.utils.PRODUCT_HOST_PATH
 import ru.hackathone.core.utils.STAFF_HOST_PATH
 
 val coreModule = module {
@@ -58,6 +63,15 @@ val coreModule = module {
         )
     }
     single<StaffService> { StaffServiceImpl(client = get()) }
+
+    single<ProductClient> {
+        ProductClientImpl(
+            client = provideKtorHttpClient(),
+            addr = "http://".plus(get<SettingsStorage>().getString(PRODUCT_HOST_PATH))
+        )
+    }
+
+    single<ProductService> { ProductServiceImpl(client = get()) }
 }
 
 fun ComponentFactory.createMessageComponent(
