@@ -23,24 +23,25 @@ import ru.hackathone.core.inventoryApi.staff.models.TaskStatus
  */
 class StaffServiceImpl(val client: StaffClient) : StaffService {
     override suspend fun getTaskList(): Array<Task> {
-       return try{
-        val response = client.getTaskList()
-        when (response.status) {
-            HttpStatusCode.OK -> {
-                return response.body<Array<Task>>()
-            }
+        return try {
+            val response = client.getTaskList()
+            when (response.status) {
+                HttpStatusCode.OK -> {
+                     response.body<Array<Task>>()
+                }
 
-            else -> throw UnknownStatusCodeException()
-        }}
-       catch (e:NoContentException) {
-       return arrayOf()}
+                else -> throw UnknownStatusCodeException()
+            }
+        } catch (e: NoContentException) {
+            return arrayOf()
+        }
     }
 
     override suspend fun getTaskListByStatus(statusName: String): Array<Task> {
         return try {
             val response = client.getTaskListByStatus(statusName)
             when (response.status) {
-                HttpStatusCode.OK -> return response.body<Array<Task>>()
+                HttpStatusCode.OK -> response.body<Array<Task>>()
                 else -> throw UnknownStatusCodeException()
             }
         } catch (e: NoContentException) {
@@ -55,7 +56,7 @@ class StaffServiceImpl(val client: StaffClient) : StaffService {
             val response = client.getWorkerTasksById(workerId)
             when (response.status) {
                 HttpStatusCode.OK -> {
-                    return response.body<Array<Task>>()
+                    response.body<Array<Task>>()
                 }
 
                 else -> throw UnknownStatusCodeException()
@@ -70,9 +71,8 @@ class StaffServiceImpl(val client: StaffClient) : StaffService {
         return try {
             val response = client.getStatusList()
             when (response.status) {
-                HttpStatusCode.OK -> {
-                    response.body<Array<TaskStatus>>()
-                }
+                HttpStatusCode.OK -> response.body<Array<TaskStatus>>()
+
 
                 else -> throw UnknownStatusCodeException()
             }
