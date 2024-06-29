@@ -43,14 +43,13 @@ fun HomeUi(component: HomeComponent) {
             }
 
             // Not Implemented
-            if (false) {
-                if (roleId.value <= StaffRole.MANAGER.roleId) {
-                    MenuButton(
-                        title = "Staff",
-                        onClick = component::onStaffClick
-                    )
-                }
+            if (roleId.value <= StaffRole.MANAGER.roleId) {
+                MenuButton(
+                    title = "Staff",
+                    onClick = component::onStaffClick
+                )
             }
+
         }
     }
 }

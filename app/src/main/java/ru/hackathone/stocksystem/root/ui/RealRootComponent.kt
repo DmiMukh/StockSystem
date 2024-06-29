@@ -20,6 +20,7 @@ import ru.hackathone.stocksystem.createSignInComponent
 import ru.hackathone.stocksystem.createSplashComponent
 import ru.hackathone.stocksystem.order.createOrderRootComponent
 import ru.hackathone.stocksystem.product.createProductRootComponent
+import ru.hackathone.stocksystem.staff.createStaffRootComponent
 
 class RealRootComponent(
     componentContext: ComponentContext,
@@ -49,7 +50,7 @@ class RealRootComponent(
                 componentContext = componentContext,
                 onOrder = { navigation.push(ChildConfig.OrderRoot) },
                 onProduct = { navigation.push(ChildConfig.ProductRoot) },
-                onStaff = {},
+                onStaff = { navigation.push(ChildConfig.StaffRoot) },
                 onLogOut = { navigation.replaceCurrent(ChildConfig.SignIn) }
             )
         )
@@ -89,6 +90,13 @@ class RealRootComponent(
                 onFinish = { navigation.replaceCurrent(ChildConfig.SignIn) }
             )
         )
+
+        ChildConfig.StaffRoot -> RootComponent.Child.StaffRoot(
+            component = this.componentFactory.createStaffRootComponent(
+                componentContext = componentContext,
+                onBack = { navigation.pop() }
+            )
+        )
     }
 
     private sealed interface ChildConfig : Parcelable {
@@ -110,5 +118,8 @@ class RealRootComponent(
 
         @Parcelize
         object Splash : ChildConfig
+
+        @Parcelize
+        object StaffRoot : ChildConfig
     }
 }

@@ -9,6 +9,7 @@ import ru.hackathone.stocksystem.product.root.ProductRootComponent
 import ru.hackathone.stocksystem.settings.SettingsComponent
 import ru.hackathone.stocksystem.signin.SignInComponent
 import ru.hackathone.stocksystem.splash.SplashComponent
+import ru.hackathone.stocksystem.staff.root.StaffRootComponent
 
 interface RootComponent {
 
@@ -24,5 +25,7 @@ interface RootComponent {
         class Settings(val component: SettingsComponent) : Child
         class SignIn(val component: SignInComponent) : Child
         class Splash(val component: SplashComponent) : Child
+
+        class StaffRoot(val component: StaffRootComponent) : Child
     }
 }

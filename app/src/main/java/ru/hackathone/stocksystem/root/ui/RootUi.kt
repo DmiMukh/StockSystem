@@ -16,6 +16,7 @@ import ru.hackathone.stocksystem.product.root.ProductRootUi
 import ru.hackathone.stocksystem.settings.SettingsUi
 import ru.hackathone.stocksystem.signin.SignInUi
 import ru.hackathone.stocksystem.splash.SplashUi
+import ru.hackathone.stocksystem.staff.root.StaffRootUi
 
 @Composable
 fun RootContent(
@@ -36,6 +37,7 @@ fun RootContent(
             is RootComponent.Child.Settings -> SettingsUi(child.component)
             is RootComponent.Child.SignIn -> SignInUi(child.component)
             is RootComponent.Child.Splash -> SplashUi(child.component)
+            is RootComponent.Child.StaffRoot -> StaffRootUi(child.component)
         }
     }
 
