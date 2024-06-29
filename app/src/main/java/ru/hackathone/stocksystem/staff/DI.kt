@@ -24,12 +24,14 @@ fun ComponentFactory.createStaffRootComponent(
 fun ComponentFactory.createStaffListComponent(
     componentContext: ComponentContext,
     onBack: () -> Unit,
-    onDetails: () -> Unit
+    onDetails: () -> Unit,
+    onSignUp: () -> Unit
 ) : StaffListComponent {
     return RealStaffListComponent(
         componentContext = componentContext,
         onBack = onBack,
         onDetails = onDetails,
+        onSignUp = onSignUp,
         service = get(),
         messageService = get(),
         storage = get()
@@ -43,7 +45,8 @@ fun ComponentFactory.createRealSignUpComponent(
     return RealSignUpComponent(
         componentContext = componentContext,
         onBack = onBack,
-        service = get(),
+        authService = get(),
+        staffService = get(),
         messageService = get()
     )
 }

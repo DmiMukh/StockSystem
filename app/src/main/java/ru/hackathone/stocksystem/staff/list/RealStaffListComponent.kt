@@ -25,6 +25,7 @@ class RealStaffListComponent(
     componentContext: ComponentContext,
     private val onBack: () -> Unit,
     private val onDetails: () -> Unit,
+    private val onSignUp: () -> Unit,
     private val service: StaffService,
     private val messageService: MessageService,
     private val storage: SettingsStorage
@@ -40,7 +41,7 @@ class RealStaffListComponent(
     override val viewState get() = componentInstance.viewState
 
     override fun onAddStaffClick() {
-        messageService.showMessage(Message("Not yet implemented"))
+        this.onSignUp.invoke()
     }
 
     private class StaffListKeeper :  InstanceKeeper.Instance {

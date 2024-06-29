@@ -4,11 +4,14 @@ import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.childStack
+import com.arkivanov.decompose.router.stack.pop
+import com.arkivanov.decompose.router.stack.push
 import com.arkivanov.essenty.parcelable.Parcelable
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.parcelize.Parcelize
 import ru.hackathone.core.ComponentFactory
 import ru.hackathone.core.utils.toStateFlow
+import ru.hackathone.stocksystem.staff.createRealSignUpComponent
 import ru.hackathone.stocksystem.staff.createStaffListComponent
 
 class RealStaffRootComponent(
@@ -34,13 +37,24 @@ class RealStaffRootComponent(
             component = this.componentFactory.createStaffListComponent(
                 componentContext = componentContext,
                 onBack = { onBack.invoke() },
-                onDetails = { }
+                onDetails = { },
+                onSignUp = { navigation.push(ChildConfig.SignUp) }
             )
+        )
+
+        is ChildConfig.SignUp -> StaffRootComponent.Child.SignUp(
+           component = this.componentFactory.createRealSignUpComponent(
+               componentContext = componentContext,
+               onBack = { navigation.pop() }
+           )
         )
     }
 
     sealed interface ChildConfig : Parcelable {
         @Parcelize
         object List : ChildConfig
+
+        @Parcelize
+        object SignUp : ChildConfig
     }
 }
