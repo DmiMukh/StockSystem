@@ -41,32 +41,19 @@ class RealProductDetailsComponent(
                 status = statusId.value
             )
 
-            /*
             componentScope.launch {
                 if (product.id == -1) {
-                    val taskId = service.createProduct()
-                    service.assignTask(userId.value, taskId)
+                    val productId = service.createProduct(newProduct)
 
-                    messageService.showMessage(Message(text = "Task created!"))
+                    messageService.showMessage(Message(text = "Product created! (ID = $productId)"))
                 } else {
-                    if (task.title != title.value
-                        || task.description != description.value
-                        || task.statusId != statusId.value) {
-                        service.updateTask(task.id, newTask)
-                    }
-
-                    if (task.userId != userId.value) {
-                        service.assignTask(userId.value, task.id)
-                    }
-
-                    messageService.showMessage(Message(text = "Task updated!"))
+                    service.updateProduct(product.id, newProduct)
+                    messageService.showMessage(Message(text = "Product updated!"))
                 }
 
                 onBack.invoke()
             }
-            */
 
-            // TODO("Add Save")
             onBack.invoke()
         }
     )
