@@ -9,8 +9,9 @@ interface OrderListComponent {
     val toolbarComponent: OrderListToolbarComponent
 
     val viewState: StateFlow<OrderListState>
+    val roleId: StateFlow<Int>
 
     fun onAddOrderClick()
-
     fun onOrderClick(task: Task)
+
 }

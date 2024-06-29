@@ -8,12 +8,15 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import android.content.res.Resources.NotFoundException
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.StateFlow
 import ru.hackathone.core.inventoryApi.exceptions.BadRequestException
 import ru.hackathone.core.inventoryApi.exceptions.UnknownStatusCodeException
 import ru.hackathone.core.inventoryApi.staff.models.Task
 import ru.hackathone.core.inventoryApi.staff.service.StaffService
 import ru.hackathone.core.message.data.MessageService
 import ru.hackathone.core.message.domain.Message
+import ru.hackathone.core.storage.SettingsStorage
+import ru.hackathone.core.utils.ROLE_PATH
 import ru.hackathone.core.utils.componentScope
 import ru.hackathone.stocksystem.order.list.toolbar.RealOrderListToolbarComponent
 
@@ -22,7 +25,8 @@ class RealOrderListComponent(
     private val onBack: () -> Unit,
     private val onDetails: (Task) -> Unit,
     private val service: StaffService,
-    private val messageService: MessageService
+    private val messageService: MessageService,
+    private val storage: SettingsStorage
 ) : ComponentContext by componentContext, OrderListComponent {
 
     private val componentInstance = instanceKeeper.getOrCreate(RealOrderListComponent::OrderListKeeper)
@@ -33,6 +37,8 @@ class RealOrderListComponent(
         onRefresh = { this.refreshOrders() }
     )
     override val viewState get() = componentInstance.viewState
+    override val roleId = MutableStateFlow(100)
+
     override fun onAddOrderClick() {
         this.onDetails.invoke(Task())
     }
@@ -75,5 +81,9 @@ class RealOrderListComponent(
 
             return@launch
         }
+    }
+
+    init {
+        roleId.value = this.storage.getInt(ROLE_PATH)
     }
 }

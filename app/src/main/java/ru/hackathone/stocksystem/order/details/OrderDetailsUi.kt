@@ -13,10 +13,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import ru.hackathone.core.theme.AppTheme
+import ru.hackathone.core.utils.StaffRole
 import ru.hackathone.stocksystem.order.details.toolbar.OrderDetailsToolbarUi
 
 @Composable
 fun OrderDetailsUi(component: OrderDetailsComponent) {
+
+    val roleId = component.roleId.collectAsState()
 
     val title = component.title.collectAsState()
     val description = component.description.collectAsState()
@@ -33,6 +36,7 @@ fun OrderDetailsUi(component: OrderDetailsComponent) {
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(12.dp),
+                enabled = (roleId.value <= StaffRole.MANAGER.roleId),
                 label = { Text(text = "Title") },
                 supportingText = { Text(text = "Required field") },
                 isError = title.value.isEmpty(),
@@ -45,10 +49,17 @@ fun OrderDetailsUi(component: OrderDetailsComponent) {
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(12.dp),
+                enabled = (roleId.value <= StaffRole.MANAGER.roleId),
                 label = { Text(text = "Description") },
                 supportingText = { Text(text = "Option field") },
                 shape = CircleShape
             )
+
+            // Task Status
+
+            if (roleId.value <= StaffRole.MANAGER.roleId) {
+                // Set User
+            }
         }
     }
 }

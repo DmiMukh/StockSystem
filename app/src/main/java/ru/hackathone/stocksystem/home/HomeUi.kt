@@ -35,17 +35,19 @@ fun HomeUi(component: HomeComponent) {
                 onClick = component::onOrderClick
             )
 
-            MenuButton(
-                title = "Product",
-                onClick = component::onProductClick,
-                enabled = (roleId.value <= StaffRole.MANAGER.roleId)
-            )
+            if (roleId.value <= StaffRole.MANAGER.roleId) {
+                MenuButton(
+                    title = "Product",
+                    onClick = component::onProductClick
+                )
+            }
 
-            MenuButton(
-                title = "Staff",
-                onClick = component::onStaffClick,
-                enabled = (roleId.value <= StaffRole.MANAGER.roleId)
-            )
+            if (roleId.value <= StaffRole.MANAGER.roleId) {
+                MenuButton(
+                    title = "Staff",
+                    onClick = component::onStaffClick
+                )
+            }
         }
     }
 }

@@ -7,6 +7,8 @@ interface OrderDetailsComponent {
 
     val toolbarComponent: OrderDetailsToolbarComponent
 
+    val roleId: StateFlow<Int>
+
     val description: StateFlow<String>
     val title: StateFlow<String>
 
