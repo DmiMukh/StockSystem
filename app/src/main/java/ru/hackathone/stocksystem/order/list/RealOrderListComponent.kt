@@ -84,7 +84,7 @@ class RealOrderListComponent(
                 val tasks = if (roleId.value <= StaffRole.MANAGER.roleId) service.getTaskList()
                 else service.getWorkerTasksById(storage.getInt(USER_PATH))
 
-                if (tasks.size == 0) {
+                if (tasks.isEmpty()) {
                     viewState.update { OrderListState.NoItems }
                     return@launch
                 }

@@ -1,5 +1,6 @@
 package ru.hackathone.stocksystem.product.list
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -8,20 +9,30 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AddCircle
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import ru.hackathone.core.theme.AppTheme
 import ru.hackathone.core.utils.ICON_SIZE
+import ru.hackathone.stocksystem.order.list.OrderListNoItems
+import ru.hackathone.stocksystem.order.list.OrderListState
+import ru.hackathone.stocksystem.order.list.item.OrderItem
+import ru.hackathone.stocksystem.product.list.item.ProductListItem
 import ru.hackathone.stocksystem.product.list.toolbar.ProductListToolbarUi
 
 @Composable
 fun ProductListUi(component: ProductListComponent){
+
+    val viewState = component.viewState.collectAsState()
+
     Scaffold(
         topBar = { ProductListToolbarUi(component.toolbarComponent) },
         floatingActionButton = {
@@ -34,12 +45,32 @@ fun ProductListUi(component: ProductListComponent){
             }
         }
     ) { paddingValues ->
-        Column(
-            modifier = Modifier.padding(paddingValues)
-        ) {
-            Row {
-                Text(text = "Count:", modifier = Modifier.padding(end = 4.dp))
-                Text(text = "0")
+        Box(modifier = Modifier
+            .padding(paddingValues)
+            .fillMaxSize()) {
+            when(val state = viewState.value) {
+                is ProductListState.Display -> {
+                    LazyColumn(
+                        modifier = Modifier.fillMaxSize()
+                    ) {
+                        state.items.forEach { model ->
+                            item {
+                                ProductListItem(
+                                    model = model,
+                                    onClick = component::onProductClick,
+                                )
+                            }
+                        }
+                    }
+                }
+                ProductListState.Loading -> CircularProgressIndicator(
+                    modifier = Modifier.align(Alignment.Center)
+                )
+                ProductListState.NoItems -> OrderListNoItems(modifier = Modifier
+                    .padding(16.dp)
+                    .align(Alignment.Center)
+                )
+                ProductListState.Idle -> {}
             }
         }
     }
