@@ -9,6 +9,7 @@ import com.arkivanov.decompose.extensions.compose.jetpack.stack.animation.plus
 import com.arkivanov.decompose.extensions.compose.jetpack.stack.animation.scale
 import com.arkivanov.decompose.extensions.compose.jetpack.stack.animation.stackAnimation
 import ru.hackathone.stocksystem.staff.list.StaffListUi
+import ru.hackathone.stocksystem.staff.signup.SignUpUi
 
 @Composable
 fun StaffRootUi(
@@ -24,6 +25,7 @@ fun StaffRootUi(
     ) {
         when (val child = it.instance) {
             is StaffRootComponent.Child.List -> StaffListUi(child.component)
+            is StaffRootComponent.Child.SignUp -> SignUpUi(child.component)
         }
     }
 }

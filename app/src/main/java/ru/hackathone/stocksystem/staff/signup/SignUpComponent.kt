@@ -13,7 +13,10 @@ interface SignUpComponent {
     val roleId: StateFlow<Int>
     val roleName: StateFlow<String>
 
+    val roles: StateFlow<List<Pair<Int, String>>>
+
     fun onFullNameChange(newValue: String)
     fun onLoginChange(newValue: String)
     fun onPasswordChange(newValue: String)
+    fun onRoleChange(newValue: Pair<Int, String>)
 }
