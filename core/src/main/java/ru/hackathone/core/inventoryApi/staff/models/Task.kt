@@ -13,6 +13,7 @@ data class Task(
     val description: String,
     @SerialName("status_id")
     val statusId: Int,
+    @SerialName("user_id")
     val userId: Int
 ) : Parcelable {
     constructor() : this (

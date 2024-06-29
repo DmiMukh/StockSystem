@@ -70,18 +70,18 @@ class StaffClientTest {
     @Test
     fun getTaskListByStatus() = runBlocking {
         val response = client.getTaskListByStatus("")
-        assertEquals(response.status, HttpStatusCode.OK)
+        assertEquals(HttpStatusCode.OK, response.status)
     }
 
     @Test
     fun getWorkerTasksById() = runBlocking {
         val response = client.getWorkerTasksById(0)
-        assertEquals(response.status, HttpStatusCode.OK)
+        assertEquals(HttpStatusCode.OK, response.status)
     }
 
     @Test
     fun assignTask() = runBlocking {
         val response = client.assignTask(0, 0)
-        assertEquals(1, 0)
+        assertEquals(200, response.status)
     }
 }
