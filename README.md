@@ -134,6 +134,3 @@ core/src/test/java/ru/hackathone/core/inventoryapi
 
 ## Интерфейс работника
 ![изображение](https://github.com/DmiMukh/StockSystem/assets/124619126/ba65b4bf-98e0-48c8-bf54-7aab29ecd05e)
-
-
-## Более подробное объяснение архитектуры дано в ютуб видео (настоятельно ознакомьтесь) : https://www.youtube.com/watch?v=dQw4w9WgXcQ
